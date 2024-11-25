@@ -11,14 +11,6 @@
             "title": "To-Do",
             "tasks": [
                 {
-                    "text": "SUB 3 - MONTAR O LAYOUT A SER UTILIZADO NA APLICAÇÃO",
-                    "id": "kmn341o608c4dkozr8tmbhmb"
-                },
-                {
-                    "text": "SUB 2 -  IMPLEMENTAR O LOGIN - SENDO NO FRONT E BACK",
-                    "id": "onpo64atpu0bymdmpp7mo6jn"
-                },
-                {
                     "text": "SUB 1 - IMPLEMNETAR A MODELAGEM DOS DADOS NO DB",
                     "id": "ihd0ttjtnh6j7qa74kl5m3hy"
                 }
@@ -41,5 +33,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1732462913187
+    "timestamp": 1732539354166
 }
