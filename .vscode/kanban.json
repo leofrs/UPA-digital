@@ -1,0 +1,37 @@
+{
+    "title": "Kanban",
+    "cols": [
+        {
+            "title": "Bugs",
+            "tasks": [],
+            "id": "ol9ywfuu5gxxrvs6wzjq3xuw",
+            "color": "#eb144c"
+        },
+        {
+            "title": "To-Do",
+            "tasks": [
+                {
+                    "text": "SUB 2 - IMPLEMENTAR O LOGIN -  NO FRONT E BACK",
+                    "id": "ihd0ttjtnh6j7qa74kl5m3hy"
+                }
+            ],
+            "id": "d9mbljkctzn1ipmma3gbshef",
+            "color": "#fcb900"
+        },
+        {
+            "title": "Doing",
+            "tasks": [],
+            "id": "kjyu3dpf2o16air9fw6hfah5",
+            "color": "#0693e3"
+        },
+        {
+            "title": "Done",
+            "tasks": [],
+            "id": "gi9lkfdwqjwo46nubs9mqywh",
+            "color": "#00d084"
+        }
+    ],
+    "autosave": true,
+    "saveToFile": true,
+    "timestamp": 1732539354166
+}
