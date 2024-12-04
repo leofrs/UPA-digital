@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { FaInfoCircle } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
+import axios from 'axios';
 
 function Login() {
   const USER_REGEX = /^\d{11}$/;
@@ -106,16 +107,52 @@ function Login() {
     setErrMsg("");
   }, [user, pwd, matchPwd, crm, coren]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Formulário enviado", { 
-      activeLogin, 
-      user, 
-      pwd, 
+  
+
+const URL_API = 'http://localhost:3000/api/auth';
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  try {
+    const resposta = await axios.post(`${URL_API}/login`, {
+      username: user,
+      password: pwd,
       ...(activeLogin === "medico" && { crm }),
-      ...(activeLogin === "enfermeiro" && { coren }) 
+      ...(activeLogin === "enfermeiro" && { coren })
     });
-  };
+
+    // Armazena token no localStorage
+    localStorage.setItem('token', resposta.data.token);
+    
+    // Define cabeçalho padrão para futuras requisições
+    axios.defaults.headers.common['Authorization'] = `Bearer ${resposta.data.token}`;
+
+    // Redireciona ou atualiza estado do app
+    setSuccess(true);
+  } catch (err) {
+    setErrMsg('Falha no login');
+  }
+};
+
+// Interceptor para tratar requisições não autorizadas
+axios.interceptors.response.use(
+  resposta => resposta,
+  erro => {
+    if (erro.response.status === 401) {
+      // Token expirou ou é inválido, faz logout
+      localStorage.removeItem('token');
+      // Redireciona para login
+    }
+    return Promise.reject(erro);
+  }
+);
+
+// Função para verificar validade do token
+const verificarValidadeToken = () => {
+  const token = localStorage.getItem('token');
+  return token && !tokenExpirado(token);
+};
 
   const toggleLoginType = (type) => {
     setActiveLogin(type);
