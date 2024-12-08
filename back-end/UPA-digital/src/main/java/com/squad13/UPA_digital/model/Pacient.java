@@ -9,25 +9,14 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-public class Pacient {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String nome;
-    private String dataNas;
-    private String endereco;
-    private String contato;
+public class Pacient extends User{
 
     @Column(unique = true)
     private String cartSusNum;
-
-    private String senha;
-    private byte[] foto;
+    private String address;
 
     @OneToMany(mappedBy = "paciente")
-    private List<Medical_Record> prontuarios;
+    private List<Medical_Record> medical_recordList;
 
     @OneToMany(mappedBy = "paciente")
     private List<Calendar> calendar;

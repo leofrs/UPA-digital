@@ -14,8 +14,8 @@ public class Calendar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date horarios;
-    private Date datas;
+    private Date hours;
+    private Date dates;
 
     @ManyToOne
     @JoinColumn(name = "id_medico")
