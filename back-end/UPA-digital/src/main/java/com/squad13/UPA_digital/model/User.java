@@ -1,21 +1,27 @@
 package com.squad13.UPA_digital.model;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+@MappedSuperclass
 @Data
 @NoArgsConstructor
-public class Health_Post {
+@AllArgsConstructor
+public abstract class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-    private String address;
-    private String funcTime;
+    private String birthDate;
+    private String contact;
+
+    private String password;
+    private byte[] photo;
+
 }

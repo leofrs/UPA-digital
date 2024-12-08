@@ -7,19 +7,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Nurse {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String nome;
-    private String dataNas;
-    private String contato;
-    private String senha;
-    private String especialidade;
+public class Nurse extends User {
 
     @Column(unique = true)
     private String corem;
 
-    private byte[] foto;
+    private String speciality;
 }

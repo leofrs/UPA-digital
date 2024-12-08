@@ -10,21 +10,12 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-public class Doctor {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String nome;
-    private String dataNas;
-    private String contato;
+public class Doctor extends User {
 
     @Column(unique = true)
     private String crm;
 
-    private String senha;
-    private String especialidade;
-    private byte[] foto;
+    private String speciality;
 
     @OneToMany(mappedBy = "medico")
     private List<Medical_Record> medical_recordList;
