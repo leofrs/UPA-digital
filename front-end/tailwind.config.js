@@ -1,16 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./pages//*.{js,jsx,ts,tsx}",
-    "./components//.{js,jsx,ts,tsx}",
-    "./src/**/.{html,css,js,jsx,ts,tsx}",
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
     extend: {
       colors: {
-        white: '#ffffff', // Assegura que o branco será realmente branco
-      },
-    },
+        white: '#ffffff'
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 }
