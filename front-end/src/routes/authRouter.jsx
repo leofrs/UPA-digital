@@ -13,7 +13,9 @@ const AuthRoute = ({ children, requiredRole }) => {
     return <Navigate to="/" replace />;
   }
 
-  return children;
+  return children
+
+  
 };
 
 export default AuthRoute;
