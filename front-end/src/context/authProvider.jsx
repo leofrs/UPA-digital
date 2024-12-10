@@ -2,7 +2,8 @@ import { useState } from "react";
 import { AuthContext } from "./authContext";
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState({ role: "patient" });
+    const [user, setUser] = useState({ role: "doctor" });
+    
 
     const login = (userData) => setUser(userData);
     const logout = () => setUser(null);
