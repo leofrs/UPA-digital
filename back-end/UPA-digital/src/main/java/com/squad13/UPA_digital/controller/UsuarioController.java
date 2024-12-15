@@ -18,6 +18,7 @@ public class UsuarioController {
     private UserService userService;
 
     @PostMapping("/login")
+    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<?> logar(@RequestBody LoginRequestDTO loginRequestDTO) throws Exception {
         try {
             // Autentica o usuário
