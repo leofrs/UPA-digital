@@ -7,7 +7,7 @@ import axios from "axios";
 
 function LoginPatient(){
     
-    const URL_API = 'http://localhost:3500/api/auth';
+    const URL_API = 'http://localhost:8080/api/v1/login/login';
     const [activeLogin, setActiveLogin] = useState("usuario");
     const [redirectToDashboard, setRedirectToDashboard] = useState(false);
 
