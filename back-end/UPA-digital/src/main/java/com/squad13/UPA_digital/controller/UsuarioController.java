@@ -19,6 +19,7 @@ public class UsuarioController {
 
     @PostMapping("/login")
     public ResponseEntity<?> logar(@RequestBody LoginRequestDTO loginRequestDTO) throws Exception {
+        System.out.println("Recebido paciente:");
         try {
             // Autentica o usuário
             Optional<? extends User> user = (userService.login(
