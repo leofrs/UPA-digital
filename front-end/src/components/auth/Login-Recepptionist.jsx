@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Navigate, useNavigate } from "react-router-dom";
-import { Axios } from "axios";
+import axios from "axios";
 
 
 function LoginRecepptionist(){
