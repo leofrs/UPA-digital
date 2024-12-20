@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Calendar;
 import java.util.List;
 
 @Entity
@@ -17,9 +16,9 @@ public class Doctor extends User {
 
     private String speciality;
 
-    @OneToMany(mappedBy = "medico")
+    @OneToMany(mappedBy = "doctor")
     private List<Medical_Record> medical_recordList;
 
-    @OneToMany(mappedBy = "medico")
+    @OneToMany(mappedBy = "doctor")
     private List<Calendar> calendar;
 }
