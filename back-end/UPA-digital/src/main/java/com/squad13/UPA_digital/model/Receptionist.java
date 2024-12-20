@@ -11,6 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 public class Receptionist extends User{
 
-    @OneToMany(mappedBy = "receptionist")
+    @OneToMany(mappedBy = "recepcionista")
     private List<Calendar> calendar;
 }

@@ -15,10 +15,10 @@ public class Pacient extends User{
     private String cartSusNum;
     private String address;
 
-    @OneToMany(mappedBy = "pacient")
+    @OneToMany(mappedBy = "paciente")
     private List<Medical_Record> medical_recordList;
 
-    @OneToMany(mappedBy = "pacient")
+    @OneToMany(mappedBy = "paciente")
     private List<Calendar> calendar;
 }
 

@@ -3,28 +3,21 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Navigate, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "axios"; // Certifique-se de importar o axios corretamente
 
-function LoginDoctor(){
-    const URL_API = 'http://localhost:3500/api/auth';
-    const [activeLogin, setActiveLogin] = useState("usuario");
-    const [redirectToDashboard, setRedirectToDashboard] = useState(false);
+function LoginDoctor() {
+    const [errMsg, setErrMsg] = useState(""); // Para armazenar mensagens de erro
+    const navigate = useNavigate();
+    const URL_API = 'http://localhost:8080/api/v1/login/login';
 
-    const toggleLoginType = (type) => {
-        setActiveLogin(type);
-    };
-
-    // Crie o schema de validação APÓS definir activeLogin
+    // Schema de validação
     const loginSchema = z.object({
         cpf: z
             .string()
             .length(15, "O cartão do SUS deve conter exatamente 15 números")
             .regex(/^\d+$/, "O cartão do SUS deve conter apenas números"),
         password: z.string().min(6, "A senha deve conter pelo menos 6 caracteres"),
-        crm: 
-             z.string().min(1, "CRM é obrigatório para médicos")
-             
-      
+        crm: z.string().length(10, "Crm deve conter exatamente 10 números")
     });
 
     const {
@@ -37,34 +30,46 @@ function LoginDoctor(){
             cpf: "",
             password: "",
             crm: ""
-            
         }
     });
-    const navigate = useNavigate()
 
-    const onSubmit =  (data) => {
-       if( data.cpf==="123456789012345"&& data.crm=== "123" && data.password=== "123456"){
-        navigate("doctor/home")
-        
-       }
+    // Função para enviar os dados ao back-end usando Axios
+    const onSubmit = async (data) => {
+        try {
+            // Fazer a requisição POST para o back-end
+            const response = await axios.post(`${URL_API}/login`, {
+                username: data.cpf,
+                password: data.password,
+                crm: data.crm
+            });
 
-       console.log(data)
-       
-       
-       
-    } 
-    return(
+            // Armazenar o token no localStorage
+            localStorage.setItem('token', response.data.token);
+            
+            // Definir o cabeçalho Authorization para as próximas requisições
+            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+            
+            // Redirecionar para a página do doutor
+            navigate("/doctor/home");
+
+        } catch (err) {
+            // Exibir mensagem de erro caso o login falhe
+            setErrMsg('Falha no login, verifique as credenciais');
+            console.error(err);
+        }
+    }
+
+    return (
         <div className="flex justify-center items-center bg-gray-100">
             <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
                 <h1 className="text-2xl font-bold text-center text-blue-700 mb-6">Login SUS</h1>
-
-                
 
                 <form
                     onSubmit={handleSubmit(onSubmit)}
                     className="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl border border-gray-100"
                 >
                     <div className="space-y-6">
+                        {/* Campo CPF */}
                         <div>
                             <label htmlFor="cpf" className="block text-sm font-medium text-gray-600 mb-2">
                                CPF
@@ -74,10 +79,7 @@ function LoginDoctor(){
                                 type="text"
                                 {...register("cpf")}
                                 className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-xl 
-                                ${errors.cpf
-                                    ? "border-red-400"
-                                    : "border-gray-200"
-                                }`}
+                                ${errors.cpf ? "border-red-400" : "border-gray-200"}`}
                                 placeholder="Digite seu número do cartão"
                             />
                             {errors.cpf && (
@@ -87,6 +89,7 @@ function LoginDoctor(){
                             )}
                         </div>
 
+                        {/* Campo Senha */}
                         <div>
                             <label htmlFor="password" className="block text-sm font-medium text-gray-600 mb-2">
                                 Senha
@@ -96,10 +99,7 @@ function LoginDoctor(){
                                 type="password"
                                 {...register("password")}
                                 className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-xl 
-                                ${errors.password
-                                    ? "border-red-400"
-                                    : "border-gray-200"
-                                }`}
+                                ${errors.password ? "border-red-400" : "border-gray-200"}`}
                                 placeholder="Digite sua senha"
                             />
                             {errors.password && (
@@ -109,32 +109,32 @@ function LoginDoctor(){
                             )}
                         </div>
 
-                        
-                            <div>
-                                <label htmlFor="crm" className="block text-sm font-medium text-gray-600 mb-2">
-                                    CRM
-                                </label>
-                                <input
-                                    type="text"
-                                    id="crm"
-                                    {...register("crm")}
-                                    className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-xl 
-                                    ${errors.crm
-                                        ? "border-red-400"
-                                        : "border-gray-200"
-                                    }`}
-                                    placeholder="Digite seu CRM"
-                                />
-                                {errors.crm && (
-                                    <div className="text-red-500 text-sm mt-2">
-                                        {errors.crm.message}
-                                    </div>
-                                )}
-                            </div>
-                       
+                        {/* Campo CRM */}
+                        <div>
+                            <label htmlFor="crm" className="block text-sm font-medium text-gray-600 mb-2">
+                                CRM
+                            </label>
+                            <input
+                                type="text"
+                                id="crm"
+                                {...register("crm")}
+                                className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-xl 
+                                ${errors.crm ? "border-red-400" : "border-gray-200"}`}
+                                placeholder="Digite seu CRM"
+                            />
+                            {errors.crm && (
+                                <div className="text-red-500 text-sm mt-2">
+                                    {errors.crm.message}
+                                </div>
+                            )}
+                        </div>
 
-                        
+                        {/* Mensagem de erro */}
+                        {errMsg && (
+                            <div className="text-red-500 text-sm mt-2">{errMsg}</div>
+                        )}
 
+                        {/* Botão de Submit */}
                         <button
                             type="submit"
                             className="w-full py-3 px-4 bg-blue-600 text-white font-bold rounded-xl 
@@ -146,7 +146,7 @@ function LoginDoctor(){
                 </form>
             </div>
         </div>
-    )
+    );
 }
 
 export default LoginDoctor;

@@ -6,14 +6,32 @@ import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function LoginPatient(){
-    
     const URL_API = 'http://localhost:8080/api/v1/login/login';
-    const [activeLogin, setActiveLogin] = useState("usuario");
-    const [redirectToDashboard, setRedirectToDashboard] = useState(false);
+    const onSubmit = async (data) => {
+        try {
+            // Fazer a requisição POST para o back-end
+            const response = await axios.post(`${URL_API}`, {
+                username: data.cpf,
+                password: data.password,
+                
+            });
 
-    const toggleLoginType = (type) => {
-        setActiveLogin(type);
-    };
+            // Armazenar o token no localStorage
+            localStorage.setItem('token', response.data.token);
+            
+            // Definir o cabeçalho Authorization para as próximas requisições
+            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+            
+            // Redirecionar para a página do doutor
+            navigate("/doctor/home");
+
+        } catch (err) {
+            // Exibir mensagem de erro caso o login falhe
+            // setErrMsg('Falha no login, verifique as credenciais');
+            
+        }
+    }
+    
 
     // Crie o schema de validação APÓS definir activeLogin
     const loginSchema = z.object({
@@ -22,12 +40,7 @@ function LoginPatient(){
             .length(15, "O cartão do SUS deve conter exatamente 15 números")
             .regex(/^\d+$/, "O cartão do SUS deve conter apenas números"),
         password: z.string().min(6, "A senha deve conter pelo menos 6 caracteres"),
-        crm: activeLogin === "médico"
-            ? z.string().min(1, "CRM é obrigatório para médicos")
-            : z.string().optional(),
-        coren: activeLogin === "enfermeiro"
-            ? z.string().min(1, "COREN é obrigatório para enfermeiros")
-            : z.string().optional()
+
     });
 
     const {
@@ -39,23 +52,11 @@ function LoginPatient(){
         defaultValues: {
             cartaoSus: "",
             password: "",
-            crm: activeLogin === "médico" ? "" : undefined,
-            coren: activeLogin === "enfermeiro" ? "" : undefined
         }
     });
     const navigate = useNavigate()
 
-    const onSubmit =  (data) => {
-       if( data.cartaoSus==="123456789012345" && data.password === "123456"){
-        navigate("patient/home")
-        
-       }
-
-       console.log(data)
-       
-       
-       
-    } 
+   
     return(
         <div className="flex justify-center items-center  bg-gray-100">
             <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">

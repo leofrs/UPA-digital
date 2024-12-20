@@ -20,7 +20,6 @@ public class UsuarioController {
     @PostMapping("/login")
     @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<?> logar(@RequestBody LoginRequestDTO loginRequestDTO) throws Exception {
-        System.out.println("Recebido paciente:");
         try {
             // Autentica o usuário
             Optional<? extends User> user = (userService.login(

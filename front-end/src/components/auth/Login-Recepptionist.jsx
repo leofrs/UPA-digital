@@ -5,23 +5,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
 function LoginRecepptionist(){
-    const URL_API = 'http://localhost:3500/api/auth';
-    const [activeLogin, setActiveLogin] = useState("usuario");
-    const [redirectToDashboard, setRedirectToDashboard] = useState(false);
-
-    const toggleLoginType = (type) => {
-        setActiveLogin(type);
-    };
-
-    // Crie o schema de validação APÓS definir activeLogin
+    const URL_API = 'http://localhost:8080/api/v1/login/login';
     const loginSchema = z.object({
         email: z
-            .string().email(),
+            .string()
+            .regex(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "O email precisa ser válido"),
         password: z.string().min(6, "A senha deve conter pelo menos 6 caracteres"),
-       
-    });
 
+    });
     const {
         register,
         handleSubmit,
@@ -34,17 +27,35 @@ function LoginRecepptionist(){
             
         }
     });
+    const onSubmit = async (data) => {
+        try {
+            // Fazer a requisição POST para o back-end
+            const response = await axios.post(`${URL_API}/login`, {
+                username: data.cpf,
+                password: data.password,
+                crm: data.crm
+            });
+
+            // Armazenar o token no localStorage
+            localStorage.setItem('token', response.data.token);
+            
+            // Definir o cabeçalho Authorization para as próximas requisições
+            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+            
+            // Redirecionar para a página do doutor
+            navigate("/doctor/home");
+
+        } catch (err) {
+            // Exibir mensagem de erro caso o login falhe
+            setErrMsg('Falha no login, verifique as credenciais');
+            console.error(err);
+        }
+    }
+
+    
     const navigate = useNavigate()
 
-    const onSubmit =  (data) => {
-       if( data.email==="teste@gmail.com" && data.password === "123456"){
-        navigate("doctor/home")
-        
-       }
-       console.log(data)
-       
-       
-    } 
+    
     return(
         <div className="flex justify-center items-center  bg-gray-100">
         <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
