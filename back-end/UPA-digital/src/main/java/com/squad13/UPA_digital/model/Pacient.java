@@ -18,7 +18,13 @@ public class Pacient extends User{
     @OneToMany(mappedBy = "pacient")
     private List<Medical_Record> medical_recordList;
 
-    @OneToMany(mappedBy = "pacient")
+@OneToMany(mappedBy = "paciente")  // mappedBy points to the "paciente" property in Calendar
     private List<Calendar> calendar;
+
+    @ManyToOne
+    @JoinColumn(name = "id_admin")  // A coluna que armazena a referência para o Admin
+    private Admin admin;
+
+
 }
 
