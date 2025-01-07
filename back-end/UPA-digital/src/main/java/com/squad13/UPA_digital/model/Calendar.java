@@ -18,14 +18,20 @@ public class Calendar {
     private Date dates;
 
     @ManyToOne
-    @JoinColumn(name = "id_medico")
+    @JoinColumn(name = "id_medico")  // Foreign key for Doctor
     private Doctor doctor;
 
     @ManyToOne
-    @JoinColumn(name = "id_paciente")
-    private Pacient pacient;
+    @JoinColumn(name = "id_paciente")  // Foreign key for Pacient
+    private Pacient paciente;
 
     @ManyToOne
     @JoinColumn(name = "id_recepcionista")
-    private Receptionist receptionist;
+    private Receptionist recepcionista;
+
+    @ManyToOne
+    @JoinColumn(name = "id_admin") // Foreign key to Admin
+    private Admin admin;
+
+
 }

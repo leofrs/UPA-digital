@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Calendar;
 import java.util.List;
 
 @Entity
@@ -26,7 +25,7 @@ public class Admin {
     private String cpf;
     private byte[] foto;
 
-    @OneToOne(mappedBy = "admin")
+    @OneToMany(mappedBy = "admin")
     private List<Medical_Record> medical_recordList;
 
     @OneToMany(mappedBy = "admin")

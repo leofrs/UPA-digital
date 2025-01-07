@@ -6,6 +6,11 @@ import DashboardPage from "@/app/dashboard/page"; // Página de dashboard
 import HomePageDoctor from "@/pages/doctor"; // Página para médicos
 import HomePagePatient from "@/pages/patient"; // Página para pacientes
 import HomePaceRecepptionist from "@/pages/recepptionist"; // Página para recepcionistas
+import MakeAnAppointment from "@/pages/patient/makeAnAppointment";
+import AllDoctors from "@/pages/patient/allDoctors";
+import HealthPosts from "@/pages/patient/healthPosts";
+import Calendar from "@/pages/patient/Calendar";
+import Perfil from "@/pages/patient/Perfil";
 
 export const router = createBrowserRouter([
     {
@@ -20,12 +25,34 @@ export const router = createBrowserRouter([
         ),
         children: [
             {
-                path: "/patient/home",
+                path: "patient/home",
                 element: (
                     <AuthRoute requiredRole="patient">
                         <HomePagePatient />
                     </AuthRoute>
                 ),
+                children: [
+                    {
+                        path: "all-doctors",
+                        element: <AllDoctors />,
+                    },
+                    {
+                        path: "health-posts",
+                        element: <HealthPosts />,
+                    },
+                    {
+                        path: "make-appointment",
+                        element: <MakeAnAppointment />,
+                    },
+                    {
+                        path: "calendar",
+                        element: <Calendar />,
+                    },
+                    {
+                        path: "perfil",
+                        element: <Perfil />,
+                    },
+                ],
             },
             {
                 path: "/doctor/home",

@@ -6,7 +6,7 @@ export const patientNavBar = {
             items: [
                 {
                     title: "Marcar Consulta",
-                    url: "#",
+                    url: "/patient/home/make-appointment",
                     isActive: false,
                 },
                 {
@@ -22,29 +22,29 @@ export const patientNavBar = {
             items: [
                 {
                     title: "Dashboard",
-                    url: "#",
+                    url: "/patient/home",
                     isActive: true,
                 },
                 {
                     title: "Médicos",
-                    url: "#",
+                    url: "/patient/home/all-doctors",
                     isActive: false,
                 },
                 {
                     title: "Postos",
-                    url: "#",
+                    url: "/patient/home/health-posts",
                 },
                 {
                     title: "Marcar Consulta",
-                    url: "#",
+                    url: "/patient/home/make-appointment",
                 },
                 {
                     title: "Calendário",
-                    url: "#",
+                    url: "/patient/home/calendar",
                 },
                 {
                     title: "Perfil",
-                    url: "#",
+                    url: "/patient/home/perfil",
                 },
                 {
                     title: "Sair",
