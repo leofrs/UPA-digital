@@ -14,8 +14,8 @@ function LoginDoctor() {
     const loginSchema = z.object({
         cpf: z
             .string()
-            .length(15, "O cartão do SUS deve conter exatamente 15 números")
-            .regex(/^\d+$/, "O cartão do SUS deve conter apenas números"),
+            .length(11, "O cpf deve conter exatamente 15 números")
+            .regex(/^\d+$/, "O cpf deve conter apenas números"),
         password: z.string().min(6, "A senha deve conter pelo menos 6 caracteres"),
         crm: z.string().length(10, "Crm deve conter exatamente 10 números")
     });
@@ -35,7 +35,7 @@ function LoginDoctor() {
 
     // Função para enviar os dados ao back-end usando Axios
     const onSubmit = async (data) => {
-        try {
+        /*try {
             // Fazer a requisição POST para o back-end
             const response = await axios.post(`${URL_API}/login`, {
                 username: data.cpf,
@@ -56,7 +56,8 @@ function LoginDoctor() {
             // Exibir mensagem de erro caso o login falhe
             setErrMsg('Falha no login, verifique as credenciais');
             console.error(err);
-        }
+        }*/
+        navigate("/doctor/home")
     }
 
     return (

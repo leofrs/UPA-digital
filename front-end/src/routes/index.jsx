@@ -11,6 +11,8 @@ import AllDoctors from "@/pages/patient/allDoctors";
 import HealthPosts from "@/pages/patient/healthPosts";
 import Calendar from "@/pages/patient/Calendar";
 import Perfil from "@/pages/patient/Perfil";
+import AllPatient from "@/pages/doctor/AllPatient";
+import HistoryPatient from "@/pages/doctor/HistoryPatient";
 
 export const router = createBrowserRouter([
     {
@@ -55,20 +57,52 @@ export const router = createBrowserRouter([
                 ],
             },
             {
-                path: "/doctor/home",
+                path: "doctor/home",
                 element: (
                     <AuthRoute requiredRole="doctor">
                         <HomePageDoctor />
                     </AuthRoute>
                 ),
+                 children: [
+                    {
+                        path: "all-patient",
+                        element: <AllPatient />,
+                    },
+                    {
+                        path: "history-patient",
+                        element: <HistoryPatient />,
+                    },
+                    
+                   
+                    {
+                        path: "calendar",
+                        element: <Calendar />,
+                    },
+                    {
+                        path: "perfil",
+                        element: <Perfil />,
+                    },
+                ],
+               
             },
             {
-                path: "/recepptionist/home",
+                path: "recepptionist/home",
                 element: (
                     <AuthRoute requiredRole="recepptionist">
                         <HomePaceRecepptionist />
                     </AuthRoute>
                 ),
+                children: [
+                    {
+                        path: "make-appointment",
+                        element: <MakeAnAppointment />,
+                    },
+                   
+                    {
+                        path: "perfil",
+                        element: <Perfil />,
+                    },
+                ],
             },
         ],
     },
