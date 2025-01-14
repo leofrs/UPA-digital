@@ -7,10 +7,13 @@ const AuthRoute = ({ children, requiredRole }) => {
 
   if (!user) {
     return <Navigate to="/" replace />;
+   
+    
   }
 
   if (requiredRole && user.role !== requiredRole) {
     return <Navigate to="/" replace />;
+    
   }
 
   return children

@@ -28,7 +28,7 @@ function LoginRecepptionist(){
         }
     });
     const onSubmit = async (data) => {
-        try {
+        /*try {
             // Fazer a requisição POST para o back-end
             const response = await axios.post(`${URL_API}/login`, {
                 username: data.cpf,
@@ -49,7 +49,9 @@ function LoginRecepptionist(){
             // Exibir mensagem de erro caso o login falhe
             setErrMsg('Falha no login, verifique as credenciais');
             console.error(err);
-        }
+        }*/
+
+        navigate("/recepptionist/home")
     }
 
     
