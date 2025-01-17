@@ -40,7 +40,7 @@ export const patientNavBar = {
                 },
                 {
                     title: "Calendário",
-                    url: "/patient/home/calendar",
+                    url: "/patient/home/calendar-patient",
                 },
                 {
                     title: "Perfil",

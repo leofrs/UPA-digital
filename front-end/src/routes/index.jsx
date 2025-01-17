@@ -9,7 +9,8 @@ import HomePaceRecepptionist from "@/pages/recepptionist"; // Página para recep
 import MakeAnAppointment from "@/pages/patient/makeAnAppointment";
 import AllDoctors from "@/pages/patient/allDoctors";
 import HealthPosts from "@/pages/patient/healthPosts";
-import Calendar from "@/pages/patient/Calendar";
+import CalendarDoctor from "@/pages/doctor/Calendar.Doctor";
+import CalendarPatient from "@/pages/patient/CalendarPatient";
 import Perfil from "@/pages/patient/Perfil";
 import AllPatient from "@/pages/doctor/AllPatient";
 import HistoryPatient from "@/pages/doctor/HistoryPatient";
@@ -47,8 +48,8 @@ export const router = createBrowserRouter([
                         element: <MakeAnAppointment />,
                     },
                     {
-                        path: "calendar",
-                        element: <Calendar />,
+                        path: "calendar-patient",
+                        element: <CalendarPatient />,
                     },
                     {
                         path: "perfil",
@@ -75,8 +76,8 @@ export const router = createBrowserRouter([
                     
                    
                     {
-                        path: "calendar",
-                        element: <Calendar />,
+                        path: "calendar-doctor",
+                        element: <CalendarDoctor />,
                     },
                     {
                         path: "perfil",

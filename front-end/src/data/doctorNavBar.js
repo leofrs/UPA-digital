@@ -28,7 +28,7 @@ export const doctorNavBar = {
               
               {
                   title: "Calendário",
-                  url: "/doctor/home/calendar",
+                  url: "/doctor/home/calendar-doctor",
               },
               {
                   title: "Perfil",

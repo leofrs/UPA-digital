@@ -6,7 +6,7 @@ import { Outlet, useLocation } from "react-router-dom";
 
 const validRoutes = [
     "/doctor/home/home",
-    "/doctor/home/calendar",
+    "/doctor/home/calendar-doctor",
     "/doctor/home/perfil",
     "/doctor/home/history-patient",
 ];
