@@ -10,6 +10,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class Pacient extends User{
+public class Pacient extends User{
 
     @Column(unique = true)
     private String cartSusNum;
@@ -20,6 +21,12 @@ public class Pacient extends User{
 
     @OneToMany(mappedBy = "paciente")  // mappedBy points to the "paciente" property in Calendar
     private List<Calendar> calendar;
+
+    @ManyToOne
+    @JoinColumn(name = "id_admin")  // A coluna que armazena a referência para o Admin
+    private Admin admin;
+
+
 
     @ManyToOne
     @JoinColumn(name = "id_admin")  // A coluna que armazena a referência para o Admin

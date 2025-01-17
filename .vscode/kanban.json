@@ -21,6 +21,12 @@
                     "id": "ihd0ttjtnh6j7qa74kl5m3hy"
                 }
             ],
+            "tasks": [
+                {
+                    "text": "SUB 2 - IMPLEMENTAR O LOGIN -  NO FRONT E BACK",
+                    "id": "ihd0ttjtnh6j7qa74kl5m3hy"
+                }
+            ],
             "id": "kjyu3dpf2o16air9fw6hfah5",
             "color": "#0693e3"
         },
@@ -33,5 +39,6 @@
     ],
     "autosave": true,
     "saveToFile": true,
+    "timestamp": 1733703028892
     "timestamp": 1733703028892
 }

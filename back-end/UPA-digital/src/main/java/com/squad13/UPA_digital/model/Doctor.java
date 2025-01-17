@@ -10,10 +10,12 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class Doctor extends User {
+public class Doctor extends User {
 
     @Column(unique = true)
     private String crm;
 
+    private String speciality;
     private String speciality;
 
     @OneToMany(mappedBy = "doctor")  // mappedBy points to the "doctor" property in Calendar
@@ -21,6 +23,12 @@ public class Doctor extends User {
 
     @OneToMany(mappedBy = "doctor")  // mappedBy points to the "doctor" property in Calendar
     private List<Calendar> calendar;
+
+    @ManyToOne
+    @JoinColumn(name = "id_admin") // Foreign key to Admin
+    private Admin admin;
+
+
 
     @ManyToOne
     @JoinColumn(name = "id_admin") // Foreign key to Admin
