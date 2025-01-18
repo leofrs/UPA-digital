@@ -16,9 +16,14 @@ public class Medical_Record {
 
     @ManyToOne
     @JoinColumn(name = "id_paciente")
-    private Pacient pacient;
+    private Pacient paciente;
 
     @ManyToOne
     @JoinColumn(name = "id_medico")
     private Doctor doctor;
+
+
+    @ManyToOne
+    @JoinColumn(name = "id_admin")  // Relacionamento com Admin (muitos para um)
+    private Admin admin;
 }

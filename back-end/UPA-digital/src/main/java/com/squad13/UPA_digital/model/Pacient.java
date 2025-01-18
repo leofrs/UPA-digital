@@ -9,27 +9,23 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-public class Pacient {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String nome;
-    private String dataNas;
-    private String endereco;
-    private String contato;
+public class Pacient extends User{
 
     @Column(unique = true)
     private String cartSusNum;
-
-    private String senha;
-    private byte[] foto;
+    private String address;
 
     @OneToMany(mappedBy = "paciente")
-    private List<Medical_Record> prontuarios;
+    private List<Medical_Record> medical_recordList;
 
-    @OneToMany(mappedBy = "paciente")
+    @OneToMany(mappedBy = "paciente")  // mappedBy points to the "paciente" property in Calendar
     private List<Calendar> calendar;
+
+    @ManyToOne
+    @JoinColumn(name = "id_admin")  // A coluna que armazena a referência para o Admin
+    private Admin admin;
+
+
+
 }
 

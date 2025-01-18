@@ -15,7 +15,7 @@ public class Health_Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
-    private String endereco;
-    private String horaFunc;
+    private String name;
+    private String address;
+    private String funcTime;
 }

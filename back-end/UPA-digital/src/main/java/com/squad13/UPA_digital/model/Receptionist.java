@@ -9,16 +9,9 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-public class Receptionist {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String nome;
-    private String dataNas;
-    private String contato;
-    private String senha;
+public class Receptionist extends User{
 
     @OneToMany(mappedBy = "recepcionista")
-    private List<Calendar> consultas;
+    private List<Calendar> calendar;
+    
 }
