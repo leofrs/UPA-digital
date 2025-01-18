@@ -10,29 +10,32 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class Doctor extends User {
-public class Doctor extends User {
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String crm;
 
-    private String speciality;
+    @Column(nullable = false)
+    private Boolean status;
+
+    @Column(nullable = false)
     private String speciality;
 
-    @OneToMany(mappedBy = "doctor")  // mappedBy points to the "doctor" property in Calendar
-    private List<Medical_Record> medical_recordList;
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Medical_Record> medicalRecordList;
 
-    @OneToMany(mappedBy = "doctor")  // mappedBy points to the "doctor" property in Calendar
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Calendar> calendar;
 
     @ManyToOne
-    @JoinColumn(name = "id_admin") // Foreign key to Admin
+    @JoinColumn(name = "id_admin", nullable = false) // Foreign key to Admin
     private Admin admin;
-
-
 
     @ManyToOne
-    @JoinColumn(name = "id_admin") // Foreign key to Admin
-    private Admin admin;
+    @JoinColumn(name = "id_pacient", nullable = false) // Foreign key to Pacient
+    private Pacient pacient;
 
-
+    @ManyToOne
+    @JoinColumn(name = "id_prescription", nullable = false) // Foreign key to Prescription
+    private Prescription prescription;
+    
 }

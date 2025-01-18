@@ -37,8 +37,8 @@ public class Admin {
     @OneToMany(mappedBy = "admin")
     private List<Pacient> pacientList;
 
-    /** #TODO: Add the following attributes to the User class */
-    /**  
+    //#TODO: Add the following attributes to the User class
+     /** 
     @OneToMany(mappedBy = "admin")
     private List<Medicine> medicineList;
 
@@ -75,5 +75,6 @@ public class Admin {
     @OneToMany(mappedBy = "admin")
     private List<Chat_User> chat_userList3;
 
-    */
+    **/
+    
 }

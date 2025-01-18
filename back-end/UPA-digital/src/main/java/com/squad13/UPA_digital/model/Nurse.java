@@ -8,9 +8,21 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Nurse extends User {
-
+    
     @Column(unique = true)
     private String corem;
 
     private String speciality;
+
+    @ManyToOne
+    @JoinColumn(name = "id_pacient")
+    private Pacient pacient;
+
+    @ManyToOne
+    @JoinColumn(name = "id_medicine")
+    private Medicine medicine;
+
+    @ManyToOne
+    @JoinColumn(name = "id_exam")
+    private Exam exam;
 }

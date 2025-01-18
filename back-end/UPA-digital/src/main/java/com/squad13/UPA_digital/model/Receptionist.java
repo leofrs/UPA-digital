@@ -10,8 +10,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class Receptionist extends User{
-public class Receptionist extends User{
 
     @OneToMany(mappedBy = "recepcionista")
     private List<Calendar> calendar;
+    
 }
