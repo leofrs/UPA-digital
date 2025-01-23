@@ -14,7 +14,7 @@ function LoginDoctor() {
     const loginSchema = z.object({
         cpf: z
             .string()
-            .length(11, "O cpf deve conter exatamente 15 números")
+            .length(11, "O cpf deve conter exatamente 11 números")
             .regex(/^\d+$/, "O cpf deve conter apenas números"),
         password: z.string().min(6, "A senha deve conter pelo menos 6 caracteres"),
         crm: z.string().length(10, "Crm deve conter exatamente 10 números")

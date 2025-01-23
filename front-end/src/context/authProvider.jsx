@@ -4,7 +4,7 @@ import { AuthContext } from "./authContext";
 
 export const AuthProvider = ({ children }) => {
    
-    const [user, setUser] = useState({ role: "pacient"});
+    const [user, setUser] = useState({ role: "patient"});
     console.log()
     
 
