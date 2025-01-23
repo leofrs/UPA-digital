@@ -13,6 +13,8 @@ const validRoutes = [
     "/patient/home/make-appointment",
     "/patient/home/calendar-patient",
     "/patient/home/perfil",
+    "/patient/home/history",
+
 ];
 
 const HomePagePatient = () => {

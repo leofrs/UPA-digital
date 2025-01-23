@@ -20,6 +20,10 @@ export const recepptionistNavBar = {
                 url: "/recepptionist/home",
                 isActive: true,
             },
+            {
+                title: "Marcar Consulta",
+                url: "/recepptionist/home/make-appointment",
+            },
             
             {
                 title: "Perfil",

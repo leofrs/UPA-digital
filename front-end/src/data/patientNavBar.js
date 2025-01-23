@@ -11,7 +11,7 @@ export const patientNavBar = {
                 },
                 {
                     title: "Historico Médico",
-                    url: "#",
+                    url: "/patient/home/history",
                     isActive: false,
                 },
             ],
@@ -28,19 +28,27 @@ export const patientNavBar = {
                 {
                     title: "Médicos",
                     url: "/patient/home/all-doctors",
-                    isActive: false,
+                   
                 },
                 {
                     title: "Postos",
                     url: "/patient/home/health-posts",
+                    
+                    
                 },
                 {
                     title: "Marcar Consulta",
                     url: "/patient/home/make-appointment",
+                    
                 },
                 {
                     title: "Calendário",
                     url: "/patient/home/calendar-patient",
+                },
+                {
+                    title: "Historico Médico",
+                    url: "/patient/home/history",
+                    
                 },
                 {
                     title: "Perfil",

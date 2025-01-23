@@ -10,10 +10,9 @@ export const doctorNavBar = {
                   isActive: false,
               },
               {
-                  title: "Historico Pacientes",
-                  url: "/doctor/home/history-patient",
-                  isActive: false,
-              },
+                title: "Calendário",
+                url: "/doctor/home/calendar-doctor",
+            },
           ],
       },
       {
@@ -30,6 +29,11 @@ export const doctorNavBar = {
                   title: "Calendário",
                   url: "/doctor/home/calendar-doctor",
               },
+              {
+                title: "Pacientes",
+                url: "/doctor/home/all-patient",
+                isActive: false,
+            },
               {
                   title: "Perfil",
                   url: "/doctor/home/perfil",

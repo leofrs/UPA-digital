@@ -5,7 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 
-const MakeAnAppointment = () => {
+const MakeAnAppointmentRecepptionist = () => {
 
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [formStatus, setFormStatus] = useState({ show: false, success: false, message: "" });
@@ -196,4 +196,4 @@ const MakeAnAppointment = () => {
   );
 };
 
-export default MakeAnAppointment;
+export default MakeAnAppointmentRecepptionist;
