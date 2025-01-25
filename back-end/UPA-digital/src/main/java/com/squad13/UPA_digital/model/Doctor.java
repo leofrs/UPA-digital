@@ -26,6 +26,16 @@ public class Doctor extends User {
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Calendar> calendar;
 
+    @ManyToMany
+    @JoinTable(name = "doctor-healthPost",
+            joinColumns = @JoinColumn(name = "doctor_id"),
+            inverseJoinColumns = @JoinColumn(name = "healthPost_id")
+    )
+    private List<Health_Post> health_postList;
+
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    private List<Appointment> appointmentList;
+
     @ManyToOne
     @JoinColumn(name = "id_admin", nullable = false) // Foreign key to Admin
     private Admin admin;
