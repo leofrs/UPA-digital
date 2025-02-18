@@ -1,5 +1,7 @@
 package com.squad13.UPA_digital.controller;
 
+import com.squad13.UPA_digital.DTO.request.AppointmentRequestDTO;
+import com.squad13.UPA_digital.model.Appointment;
 import com.squad13.UPA_digital.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +18,8 @@ public class AppointmentController {
     private AppointmentService appointmentService;
 
     @PostMapping
-    public ResponseEntity<?> marcarConsulta(/*@RequestBody AssignmentRequestDTO assignmentRequestDTO*/) {
-        //TODO: fazer a função de marcar a consulta recebendo o DTO
+    public ResponseEntity<Appointment> marcarConsulta(@RequestBody AppointmentRequestDTO requestDTO) {
+        Appointment appointment = appointmentService.marcarConsulta(requestDTO);
+        return ResponseEntity.ok(appointment);
     }
 }
