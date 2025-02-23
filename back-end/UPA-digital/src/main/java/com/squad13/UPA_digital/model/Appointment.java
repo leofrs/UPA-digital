@@ -3,7 +3,7 @@ package com.squad13.UPA_digital.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -31,7 +31,7 @@ public class Appointment {
     private Health_Post health_post;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    private LocalDateTime date;
 
     private String description;
 }

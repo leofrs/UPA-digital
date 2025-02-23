@@ -36,16 +36,16 @@ public class Doctor extends User {
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     private List<Appointment> appointmentList;
 
-    @ManyToOne
-    @JoinColumn(name = "id_admin", nullable = false) // Foreign key to Admin
-    private Admin admin;
-
-    @ManyToOne
-    @JoinColumn(name = "id_pacient", nullable = false) // Foreign key to Pacient
-    private Pacient pacient;
-
-    @ManyToOne
-    @JoinColumn(name = "id_prescription", nullable = false) // Foreign key to Prescription
-    private Prescription prescription;
-    
+//    @ManyToOne
+//    @JoinColumn(name = "id_admin") // Foreign key to Admin
+//    private Admin admin;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "id_pacient") // Foreign key to Pacient
+//    private Pacient pacient;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "id_prescription") // Foreign key to Prescription
+//    private Prescription prescription;
+//
 }

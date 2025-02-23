@@ -6,6 +6,7 @@ import PaginationComponent from "@/components/pagination";
 import { useState } from "react";
 import { consultasMarcadas } from "@/data/tableConsultasMarcadas";
 import { Outlet, useLocation } from "react-router-dom";
+import DoctorApi from "@/api/doctor";
 
 const validRoutes = [
     "/patient/home/all-doctors",
@@ -29,6 +30,8 @@ const HomePagePatient = () => {
     const location = useLocation();
     const urlPath = location.pathname;  
     const isBaseRoute = location.pathname === "/patient/home"; // Verifica se está na rota base
+
+    DoctorApi.getDoctors();
 
     return (
         <div>

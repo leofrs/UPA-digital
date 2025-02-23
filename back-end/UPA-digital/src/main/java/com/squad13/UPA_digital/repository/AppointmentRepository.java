@@ -5,6 +5,7 @@ import com.squad13.UPA_digital.model.Doctor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -13,5 +14,5 @@ import java.util.Optional;
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
     List<Appointment> findByDoctorAndDate(Doctor doctor, Date Date);
 
-    boolean existsByDoctorAndDate(Optional<Doctor> doctor, Date date);
+    boolean existsByDoctorAndDate(Optional<Doctor> doctor, LocalDateTime date);
 }

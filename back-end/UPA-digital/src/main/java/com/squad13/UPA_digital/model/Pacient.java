@@ -26,6 +26,5 @@ public class Pacient extends User{
     private Admin admin;
 
 
-
 }
 

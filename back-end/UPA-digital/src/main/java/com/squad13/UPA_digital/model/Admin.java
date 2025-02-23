@@ -31,8 +31,8 @@ public class Admin {
     @OneToMany(mappedBy = "admin")
     private List<Calendar> calendar;
 
-    @OneToMany(mappedBy = "admin")
-    private List<Doctor> doctorList;
+//    @OneToMany(mappedBy = "admin")
+//    private List<Doctor> doctorList;
 
     @OneToMany(mappedBy = "admin")
     private List<Pacient> pacientList;

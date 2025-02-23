@@ -1,10 +1,16 @@
 package com.squad13.UPA_digital.DTO.request;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class AppointmentRequestDTO {
+
+    private Long doctorId;
+
+    private Long pacientId;
+
+    private LocalDateTime dateTime;
     private String medico;
-    private Date data;
     private String descrição;
     private Long id;
     private String especialidade;
@@ -18,14 +24,6 @@ public class AppointmentRequestDTO {
 
     public void setMedico(String medico) {
         this.medico = medico;
-    }
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
     }
 
     public String getDescrição() {
@@ -66,5 +64,9 @@ public class AppointmentRequestDTO {
 
     public void setContato(String contato) {
         this.contato = contato;
+    }
+
+    public LocalDateTime getData() {
+        return dateTime;
     }
 }
