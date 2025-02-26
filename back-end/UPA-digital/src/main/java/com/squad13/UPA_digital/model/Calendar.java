@@ -23,7 +23,7 @@ public class Calendar {
 
     @ManyToOne
     @JoinColumn(name = "id_paciente")  // Foreign key for Pacient
-    private Pacient paciente;
+    private Patient paciente;
 
     @ManyToOne
     @JoinColumn(name = "id_recepcionista")

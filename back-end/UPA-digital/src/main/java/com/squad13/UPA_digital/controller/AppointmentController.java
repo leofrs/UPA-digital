@@ -25,6 +25,7 @@ public class AppointmentController {
 
     @PostMapping
     public ResponseEntity<Appointment> marcarConsulta(@RequestBody AppointmentRequestDTO requestDTO) {
+//        TODO: trocar essa função para converter o DTO para entidade Appointment e no retorno converter de volta para responseDTO
         Appointment appointment = appointmentService.marcarConsulta(requestDTO);
         return ResponseEntity.ok(appointment);
     }

@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-public class Pacient extends User{
+public class Patient extends User{
 
     @Column(unique = true)
     private String cartSusNum;

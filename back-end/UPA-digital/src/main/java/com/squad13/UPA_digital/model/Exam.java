@@ -21,7 +21,7 @@ public class Exam {
 
     @ManyToOne
     @JoinColumn(name = "pacient_id")
-    private Pacient pacient;
+    private Patient patient;
 
     @ManyToOne
     @JoinColumn(name = "nurse_id")

@@ -1,5 +1,6 @@
 package com.squad13.UPA_digital.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,4 +49,16 @@ public class Doctor extends User {
 //    @JoinColumn(name = "id_prescription") // Foreign key to Prescription
 //    private Prescription prescription;
 //
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "crm='" + crm + '\'' +
+                ", status=" + status +
+                ", speciality='" + speciality + '\'' +
+                ", medicalRecordList=" + medicalRecordList +
+                ", calendar=" + calendar +
+                ", health_postList=" + health_postList +
+                '}';
+    }
 }

@@ -1,5 +1,6 @@
 package com.squad13.UPA_digital.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,10 +17,11 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "pacient_id")
-    private Pacient pacient;
+    private Patient patient;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id", nullable = false)
+    @JsonBackReference
     private Doctor doctor;
 
     @ManyToOne

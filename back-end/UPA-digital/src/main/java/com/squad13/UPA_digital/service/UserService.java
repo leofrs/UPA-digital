@@ -40,7 +40,7 @@
  * <ul>
  *   <li>{@link com.squad13.UPA_digital.repository.NurseRepository}</li>
  *   <li>{@link com.squad13.UPA_digital.repository.Doctor_Repository}</li>
- *   <li>{@link com.squad13.UPA_digital.repository.Pacient_Repository}</li>
+ *   <li>{@link com.squad13.UPA_digital.repository.Patient_Repository}</li>
  * </ul>
  *
  * <h2>Exceptions</h2>
@@ -58,12 +58,11 @@ package com.squad13.UPA_digital.service;
 
 import com.squad13.UPA_digital.model.Doctor;
 import com.squad13.UPA_digital.model.Nurse;
-import com.squad13.UPA_digital.model.Pacient;
+import com.squad13.UPA_digital.model.Patient;
 import com.squad13.UPA_digital.model.User;
 import com.squad13.UPA_digital.repository.Doctor_Repository;
 import com.squad13.UPA_digital.repository.NurseRepository;
-import com.squad13.UPA_digital.repository.Pacient_Repository;
-import com.squad13.UPA_digital.repository.UserRepository;
+import com.squad13.UPA_digital.repository.Patient_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -81,10 +80,10 @@ public class UserService {
     private Doctor_Repository doctorRepository;
 
     @Autowired
-    private Pacient_Repository pacientRepository;
+    private Patient_Repository pacientRepository;
 
     public Optional<User> login(String identifier, String password) throws Exception{
-        Optional<Pacient> patient = pacientRepository.findByCartSusNumAndPassword(identifier, password);
+        Optional<Patient> patient = pacientRepository.findByCartSusNumAndPassword(identifier, password);
         if (patient.isPresent()) {
             //TODO: arrumar melhor esses Optional.of
             return Optional.of(patient.get());
