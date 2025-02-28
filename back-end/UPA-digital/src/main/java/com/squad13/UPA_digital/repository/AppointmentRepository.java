@@ -12,7 +12,8 @@ import java.util.Optional;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
-    List<Appointment> findByDoctorAndDate(Doctor doctor, Date Date);
 
-    boolean existsByDoctorAndDate(Optional<Doctor> doctor, LocalDateTime date);
+    boolean existsByDoctorAndDate(Doctor doctor, LocalDateTime date);
+
+    boolean existsByDoctorAndDateBetween(Doctor doctor, LocalDateTime startRange, LocalDateTime endRange);
 }

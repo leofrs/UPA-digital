@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface Patient_Repository extends JpaRepository<Patient, Long> {
+public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     Optional<Patient> findByCartSusNumAndPassword(String cartSusNum, String password);
     

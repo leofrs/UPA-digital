@@ -31,6 +31,7 @@ public class AppointmentConverter {
         appointmentResponseDTO.setId(appointment.getId());
         appointmentResponseDTO.setDoctorId(appointment.getDoctor().getId());
         appointmentResponseDTO.setPacientId(appointment.getPatient().getId());
+        appointmentResponseDTO.setDateTime(appointment.getDate());
         appointmentResponseDTO.setDescription(appointment.getDescription());
 
         return appointmentResponseDTO;

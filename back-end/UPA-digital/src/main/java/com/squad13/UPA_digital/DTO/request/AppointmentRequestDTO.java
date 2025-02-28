@@ -8,7 +8,6 @@ public class AppointmentRequestDTO {
 
     private Long pacientId;
 
-    private String doctor;
     private LocalDateTime dateTime;
     private String description;
 
@@ -21,10 +20,6 @@ public class AppointmentRequestDTO {
     public Long getPacientId() {return pacientId;}
 
     public void setPacientId(Long pacientId) {this.pacientId = pacientId;}
-
-    public String getDoctor() {return doctor;}
-
-    public void setDoctor(String doctor) {this.doctor = doctor;}
 
     public LocalDateTime getDateTime() {return dateTime;}
 

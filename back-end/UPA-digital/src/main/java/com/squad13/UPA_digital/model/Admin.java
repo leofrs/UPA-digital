@@ -2,40 +2,18 @@ package com.squad13.UPA_digital.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-public class Admin {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Admin extends User {
 
-    private String nome;
-    private String dataNas;
-    private String contato;
-    
-    @Column(unique = true)
-    private String email;
-
-    private String senha;
-    private String cpf;
-    private byte[] foto;
-
-    @OneToMany(mappedBy = "admin")
-    private List<Medical_Record> medical_recordList;
-
-    @OneToMany(mappedBy = "admin")
-    private List<Calendar> calendar;
-
-//    @OneToMany(mappedBy = "admin")
-//    private List<Doctor> doctorList;
-
-    @OneToMany(mappedBy = "admin")
-    private List<Patient> patientList;
 
     //#TODO: Add the following attributes to the User class
      /** 

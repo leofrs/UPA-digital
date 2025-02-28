@@ -1,18 +1,20 @@
 package com.squad13.UPA_digital.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class Patient extends User{
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String cartSusNum;
+    @Column(nullable = false)
     private String address;
 
     @OneToMany(mappedBy = "paciente")
@@ -20,11 +22,6 @@ public class Patient extends User{
 
     @OneToMany(mappedBy = "paciente")  // mappedBy points to the "paciente" property in Calendar
     private List<Calendar> calendar;
-
-    @ManyToOne
-    @JoinColumn(name = "id_admin")  // A coluna que armazena a referência para o Admin
-    private Admin admin;
-
 
 }
 

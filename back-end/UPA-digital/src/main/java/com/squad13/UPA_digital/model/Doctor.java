@@ -3,12 +3,15 @@ package com.squad13.UPA_digital.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Doctor extends User {
 
@@ -37,14 +40,6 @@ public class Doctor extends User {
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     private List<Appointment> appointmentList;
 
-//    @ManyToOne
-//    @JoinColumn(name = "id_admin") // Foreign key to Admin
-//    private Admin admin;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "id_pacient") // Foreign key to Pacient
-//    private Pacient pacient;
-//
 //    @ManyToOne
 //    @JoinColumn(name = "id_prescription") // Foreign key to Prescription
 //    private Prescription prescription;

@@ -39,8 +39,8 @@
  * This class depends on the following repositories:
  * <ul>
  *   <li>{@link com.squad13.UPA_digital.repository.NurseRepository}</li>
- *   <li>{@link com.squad13.UPA_digital.repository.Doctor_Repository}</li>
- *   <li>{@link com.squad13.UPA_digital.repository.Patient_Repository}</li>
+ *   <li>{@link com.squad13.UPA_digital.repository.DoctorRepository}</li>
+ *   <li>{@link com.squad13.UPA_digital.repository.PatientRepository}</li>
  * </ul>
  *
  * <h2>Exceptions</h2>
@@ -60,9 +60,9 @@ import com.squad13.UPA_digital.model.Doctor;
 import com.squad13.UPA_digital.model.Nurse;
 import com.squad13.UPA_digital.model.Patient;
 import com.squad13.UPA_digital.model.User;
-import com.squad13.UPA_digital.repository.Doctor_Repository;
+import com.squad13.UPA_digital.repository.DoctorRepository;
 import com.squad13.UPA_digital.repository.NurseRepository;
-import com.squad13.UPA_digital.repository.Patient_Repository;
+import com.squad13.UPA_digital.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,10 +77,10 @@ public class UserService {
     @Autowired
     private NurseRepository nurseRepository;
     @Autowired
-    private Doctor_Repository doctorRepository;
+    private DoctorRepository doctorRepository;
 
     @Autowired
-    private Patient_Repository pacientRepository;
+    private PatientRepository pacientRepository;
 
     public Optional<User> login(String identifier, String password) throws Exception{
         Optional<Patient> patient = pacientRepository.findByCartSusNumAndPassword(identifier, password);
