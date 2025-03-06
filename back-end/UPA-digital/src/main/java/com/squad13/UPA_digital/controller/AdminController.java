@@ -21,6 +21,8 @@ public class AdminController {
     public ResponseEntity<Doctor> addDoctor(@RequestBody Doctor doctor) {
         //TODO: Criar DTO's para Doctor e Patient!!!
         Doctor savedDoctor = adminService.addDoctor(doctor);
+
+
         return ResponseEntity.status(HttpStatus.CREATED).body(savedDoctor);
     }
 

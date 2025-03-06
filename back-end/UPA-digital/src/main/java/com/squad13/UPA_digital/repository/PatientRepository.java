@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface PatientRepository extends JpaRepository<Patient, Long> {
 
-    Optional<Patient> findByCartSusNumAndPassword(String cartSusNum, String password);
+    Optional<Patient> findByCartSusNum(String cartSusNum);
     
 }

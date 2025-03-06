@@ -1,5 +1,6 @@
 package com.squad13.UPA_digital.repository;
 
+import aj.org.objectweb.asm.commons.Remapper;
 import com.squad13.UPA_digital.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -11,6 +12,4 @@ import java.util.Optional;
 // funções do JpaRepository assim não precisamos criar as funções uma a uma.
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-
-
 }

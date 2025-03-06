@@ -64,16 +64,15 @@ import com.squad13.UPA_digital.repository.DoctorRepository;
 import com.squad13.UPA_digital.repository.NurseRepository;
 import com.squad13.UPA_digital.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-
-
-// @Service para o springboot reconhecer que essa classe é uma service do projeto
 @Service
 public class UserService {
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private NurseRepository nurseRepository;
     @Autowired
@@ -82,21 +81,30 @@ public class UserService {
     @Autowired
     private PatientRepository pacientRepository;
 
+
     public Optional<User> login(String identifier, String password) throws Exception{
-        Optional<Patient> patient = pacientRepository.findByCartSusNumAndPassword(identifier, password);
+
+        Optional<Patient> patient = pacientRepository.findByCartSusNum(identifier);
         if (patient.isPresent()) {
-            //TODO: arrumar melhor esses Optional.of
-            return Optional.of(patient.get());
+            if (passwordEncoder.matches(password, patient.get().getPassword())) {
+                return Optional.of(patient.get());
+            }
         }
-        Optional<Doctor> doctor = doctorRepository.findByCrmAndPassword(identifier, password);
-        if (doctor.isPresent()) {
+
+        // Verificando se a senha fornecida é válida para o médico
+        Optional<Doctor> doctor = doctorRepository.findByCrm(identifier);
+        if (doctor.isPresent() && passwordEncoder.matches(password, doctor.get().getPassword())) {
             return Optional.of(doctor.get());
         }
+
+        // Verificando se a senha fornecida é válida para o enfermeiro
         Optional<Nurse> nurse = nurseRepository.findByCoremAndPassword(identifier, password);
-        if (nurse.isPresent()) {
+        if (nurse.isPresent() && passwordEncoder.matches(password, nurse.get().getPassword())) {
             return Optional.of(nurse.get());
         }
         
         throw new Exception("login inválido");
     }
+
+
 }
