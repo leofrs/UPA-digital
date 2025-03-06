@@ -3,7 +3,7 @@ package com.squad13.UPA_digital.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @MappedSuperclass
 @Getter
@@ -18,7 +18,7 @@ public abstract class User{
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
     @Column(nullable = false)
     private String contact;
     @Column(nullable = false, unique = true)

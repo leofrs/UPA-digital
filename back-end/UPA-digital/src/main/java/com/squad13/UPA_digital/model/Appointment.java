@@ -21,6 +21,7 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "doctor_id", nullable = false)
+    @JsonBackReference
     private Doctor doctor;
 
     @ManyToOne

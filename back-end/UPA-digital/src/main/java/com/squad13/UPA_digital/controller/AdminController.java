@@ -1,5 +1,6 @@
 package com.squad13.UPA_digital.controller;
 
+import com.squad13.UPA_digital.DTO.request.DoctorRequestDTO;
 import com.squad13.UPA_digital.model.Doctor;
 import com.squad13.UPA_digital.model.Patient;
 import com.squad13.UPA_digital.service.AdminService;
@@ -18,8 +19,8 @@ public class AdminController {
     private AdminService adminService;
 
     @PostMapping("/doctors")
-    public ResponseEntity<Doctor> addDoctor(@RequestBody Doctor doctor) {
-        //TODO: Criar DTO's para Doctor e Patient!!!
+    public ResponseEntity<Doctor> addDoctor(@RequestBody DoctorRequestDTO doctorRequestDTO) {
+
         Doctor savedDoctor = adminService.addDoctor(doctor);
 
 

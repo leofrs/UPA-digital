@@ -17,9 +17,7 @@ public class AppointmentResponseDTO {
         this.id = id;
     }
 
-    public Long getDoctorId() {
-        return doctorId;
-    }
+    public Long getDoctorId() {return doctorId;}
 
     public void setDoctorId(Long doctorId) {
         this.doctorId = doctorId;

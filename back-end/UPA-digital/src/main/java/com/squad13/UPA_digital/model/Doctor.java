@@ -1,8 +1,6 @@
 package com.squad13.UPA_digital.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,10 +17,10 @@ public class Doctor extends User {
     private String crm;
 
     @Column(nullable = false)
-    private Boolean status;
+    private Boolean isActive;
 
     @Column(nullable = false)
-    private String speciality;
+    private String specialty;
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Medical_Record> medicalRecordList;
@@ -45,15 +43,4 @@ public class Doctor extends User {
 //    private Prescription prescription;
 //
 
-    @Override
-    public String toString() {
-        return "Doctor{" +
-                "crm='" + crm + '\'' +
-                ", status=" + status +
-                ", speciality='" + speciality + '\'' +
-                ", medicalRecordList=" + medicalRecordList +
-                ", calendar=" + calendar +
-                ", health_postList=" + health_postList +
-                '}';
-    }
 }
