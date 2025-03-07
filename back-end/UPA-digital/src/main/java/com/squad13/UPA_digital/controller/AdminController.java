@@ -1,6 +1,8 @@
 package com.squad13.UPA_digital.controller;
 
+import com.squad13.UPA_digital.DTO.AdminConverter;
 import com.squad13.UPA_digital.DTO.request.DoctorRequestDTO;
+import com.squad13.UPA_digital.DTO.response.DoctorResponseDTO;
 import com.squad13.UPA_digital.model.Doctor;
 import com.squad13.UPA_digital.model.Patient;
 import com.squad13.UPA_digital.service.AdminService;
@@ -17,14 +19,16 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private AdminConverter adminConverter;
 
     @PostMapping("/doctors")
-    public ResponseEntity<Doctor> addDoctor(@RequestBody DoctorRequestDTO doctorRequestDTO) {
-
+    public ResponseEntity<DoctorResponseDTO> addDoctor(@RequestBody DoctorRequestDTO doctorRequestDTO) {
+        Doctor doctor =  adminConverter.toDoctorEntity(doctorRequestDTO);
         Doctor savedDoctor = adminService.addDoctor(doctor);
+        DoctorResponseDTO doctorResponseDTO = adminConverter.toDoctorDTO(savedDoctor);
 
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedDoctor);
+        return ResponseEntity.status(HttpStatus.CREATED).body(doctorResponseDTO);
     }
 
 

@@ -22,7 +22,7 @@ public class AppointmentService {
     @Autowired
     private PatientRepository patientRepository;
 
-    public Appointment marcarConsulta(Appointment appointment) {
+    public Appointment makeAppointment(Appointment appointment) {
         // essa função deve buscar os dados do médico no banco de dados,
         Doctor doctor = doctorRepository.findById(appointment.getDoctor().getId())
                 .orElseThrow(() -> new EntityNotFoundException("Médico não encontrado."));

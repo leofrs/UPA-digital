@@ -30,4 +30,47 @@ public class PatientRequestDTO {
 
     private List<Calendar> calendar;
 
+    public String getName() {
+        return name;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public String getCartSusNum() {
+        return cartSusNum;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public List<Medical_Record> getMedical_recordList() {
+        return medical_recordList;
+    }
+
+    public List<Calendar> getCalendar() {
+        return calendar;
+    }
 }

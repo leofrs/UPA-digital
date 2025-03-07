@@ -6,6 +6,7 @@ import com.squad13.UPA_digital.DTO.response.AppointmentResponseDTO;
 import com.squad13.UPA_digital.model.Appointment;
 import com.squad13.UPA_digital.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,9 +24,9 @@ public class AppointmentController {
     @PostMapping
     public ResponseEntity<AppointmentResponseDTO> marcarConsulta(@RequestBody AppointmentRequestDTO requestDTO) {
         Appointment appointment = appointmentConverter.toEntity(requestDTO);
-        Appointment confirmedAppointment = appointmentService.marcarConsulta(appointment);
+        Appointment confirmedAppointment = appointmentService.makeAppointment(appointment);
         AppointmentResponseDTO responseDTO = appointmentConverter.toDTO(appointment);
-        return ResponseEntity.ok(responseDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 
 }
