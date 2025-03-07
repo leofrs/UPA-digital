@@ -62,16 +62,7 @@ const MakeAnAppointment = () => {
       };
       console.log("Dados antes de enviar:", appointmentData);
   
-       /*const response = await axios.post(`${URL_API}/`,  (appointmentData) , {
-       id: appointmentData.id,
-       medico:appointmentData.medico,
-       data: appointmentData.data,
-       especialidade: appointmentData.especialidade,
-       contato:appointmentData.contato,
-       posto:appointmentData.posto,
-       descricao: appointmentData.descricao
-    });*/
-  
+     
  
       
       setFormStatus({
