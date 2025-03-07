@@ -1,13 +1,15 @@
 package com.squad13.UPA_digital.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Doctor extends User {
 
@@ -15,10 +17,10 @@ public class Doctor extends User {
     private String crm;
 
     @Column(nullable = false)
-    private Boolean status;
+    private Boolean isActive;
 
     @Column(nullable = false)
-    private String speciality;
+    private String specialty;
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Medical_Record> medicalRecordList;
@@ -26,16 +28,19 @@ public class Doctor extends User {
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Calendar> calendar;
 
-    @ManyToOne
-    @JoinColumn(name = "id_admin", nullable = false) // Foreign key to Admin
-    private Admin admin;
+    @ManyToMany
+    @JoinTable(name = "doctor-healthPost",
+            joinColumns = @JoinColumn(name = "doctor_id"),
+            inverseJoinColumns = @JoinColumn(name = "healthPost_id")
+    )
+    private List<Health_Post> health_postList;
 
-    @ManyToOne
-    @JoinColumn(name = "id_pacient", nullable = false) // Foreign key to Pacient
-    private Pacient pacient;
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    private List<Appointment> appointmentList;
 
-    @ManyToOne
-    @JoinColumn(name = "id_prescription", nullable = false) // Foreign key to Prescription
-    private Prescription prescription;
-    
+//    @ManyToOne
+//    @JoinColumn(name = "id_prescription") // Foreign key to Prescription
+//    private Prescription prescription;
+//
+
 }

@@ -39,8 +39,8 @@
  * This class depends on the following repositories:
  * <ul>
  *   <li>{@link com.squad13.UPA_digital.repository.NurseRepository}</li>
- *   <li>{@link com.squad13.UPA_digital.repository.Doctor_Repository}</li>
- *   <li>{@link com.squad13.UPA_digital.repository.Pacient_Repository}</li>
+ *   <li>{@link com.squad13.UPA_digital.repository.DoctorRepository}</li>
+ *   <li>{@link com.squad13.UPA_digital.repository.PatientRepository}</li>
  * </ul>
  *
  * <h2>Exceptions</h2>
@@ -58,46 +58,53 @@ package com.squad13.UPA_digital.service;
 
 import com.squad13.UPA_digital.model.Doctor;
 import com.squad13.UPA_digital.model.Nurse;
-import com.squad13.UPA_digital.model.Pacient;
+import com.squad13.UPA_digital.model.Patient;
 import com.squad13.UPA_digital.model.User;
-import com.squad13.UPA_digital.repository.Doctor_Repository;
+import com.squad13.UPA_digital.repository.DoctorRepository;
 import com.squad13.UPA_digital.repository.NurseRepository;
-import com.squad13.UPA_digital.repository.Pacient_Repository;
-import com.squad13.UPA_digital.repository.UserRepository;
+import com.squad13.UPA_digital.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-
-
-// @Service para o springboot reconhecer que essa classe é uma service do projeto
 @Service
 public class UserService {
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private NurseRepository nurseRepository;
     @Autowired
-    private Doctor_Repository doctorRepository;
+    private DoctorRepository doctorRepository;
 
     @Autowired
-    private Pacient_Repository pacientRepository;
+    private PatientRepository pacientRepository;
+
 
     public Optional<User> login(String identifier, String password) throws Exception{
-        Optional<Pacient> patient = pacientRepository.findByCartSusNumAndPassword(identifier, password);
+
+        Optional<Patient> patient = pacientRepository.findByCartSusNum(identifier);
         if (patient.isPresent()) {
-            //TODO: arrumar melhor esses Optional.of
-            return Optional.of(patient.get());
+            if (passwordEncoder.matches(password, patient.get().getPassword())) {
+                return Optional.of(patient.get());
+            }
         }
-        Optional<Doctor> doctor = doctorRepository.findByCrmAndPassword(identifier, password);
-        if (doctor.isPresent()) {
+
+        // Verificando se a senha fornecida é válida para o médico
+        Optional<Doctor> doctor = doctorRepository.findByCrm(identifier);
+        if (doctor.isPresent() && passwordEncoder.matches(password, doctor.get().getPassword())) {
             return Optional.of(doctor.get());
         }
+
+        // Verificando se a senha fornecida é válida para o enfermeiro
         Optional<Nurse> nurse = nurseRepository.findByCoremAndPassword(identifier, password);
-        if (nurse.isPresent()) {
+        if (nurse.isPresent() && passwordEncoder.matches(password, nurse.get().getPassword())) {
             return Optional.of(nurse.get());
         }
         
         throw new Exception("login inválido");
     }
+
+
 }

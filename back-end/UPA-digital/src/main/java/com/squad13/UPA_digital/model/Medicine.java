@@ -22,7 +22,7 @@ public class Medicine {
 
     @ManyToOne
     @JoinColumn(name = "id_paciente")
-    private Pacient paciente;
+    private Patient paciente;
 
     @ManyToOne
     @JoinColumn(name = "id_medico")

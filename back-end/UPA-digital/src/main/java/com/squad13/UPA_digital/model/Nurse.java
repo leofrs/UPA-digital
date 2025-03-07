@@ -16,7 +16,7 @@ public class Nurse extends User {
 
     @ManyToOne
     @JoinColumn(name = "id_pacient")
-    private Pacient pacient;
+    private Patient patient;
 
     @ManyToOne
     @JoinColumn(name = "id_medicine")
