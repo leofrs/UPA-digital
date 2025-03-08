@@ -5,10 +5,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/authContext";
+import { jwtDecode } from "jwt-decode";
+
+const token = "eyJ0eXAiO.../// jwt token";
 
 
 function LoginPage() {
-    const URL_API = 'http://localhost:8080/api/v1/login/login';
+    const URL_API = 'http://localhost:8080/api/v1/login';
     const navigate = useNavigate()
     const loginSchema = z.object({
         email: z
@@ -30,30 +33,27 @@ function LoginPage() {
         }
     });
     const onSubmit = async (data) => {
-        /*try {
+        try {
             // Fazer a requisição POST para o back-end
-            const response = await axios.post(`${URL_API}/login`, {
-                username: data.cpf,
-                password: data.password,
-                crm: data.crm
+            const response = await axios.post(`${URL_API}`, {
+                email: data.email,
+                password: data.password
             });
-
+            const decoded = jwtDecode(response.data.token);
             // Armazenar o token no localStorage
-            localStorage.setItem('token', response.data.token);
-            
+            // localStorage.setItem('token', decoded);
+            console.log(decoded.role); 
             // Definir o cabeçalho Authorization para as próximas requisições
-            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+            // axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
             
             // Redirecionar para a página do doutor
-            navigate("/doctor/home");
+            // navigate("/doctor/home");
 
         } catch (err) {
             // Exibir mensagem de erro caso o login falhe
-            setErrMsg('Falha no login, verifique as credenciais');
             console.error(err);
-        }*/
+        }
 
-        navigate("")
     }
 
     
