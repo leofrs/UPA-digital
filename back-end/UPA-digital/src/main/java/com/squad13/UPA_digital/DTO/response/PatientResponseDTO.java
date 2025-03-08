@@ -1,10 +1,6 @@
 package com.squad13.UPA_digital.DTO.response;
 
-import com.squad13.UPA_digital.model.Calendar;
-import com.squad13.UPA_digital.model.Medical_Record;
-
 import java.time.LocalDate;
-import java.util.List;
 
 public class PatientResponseDTO {
 
@@ -15,8 +11,6 @@ public class PatientResponseDTO {
     private String contact;
 
     private String email;
-
-    private Integer version;
 
     private String cartSusNum;
 
@@ -52,14 +46,6 @@ public class PatientResponseDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 
     public String getCartSusNum() {

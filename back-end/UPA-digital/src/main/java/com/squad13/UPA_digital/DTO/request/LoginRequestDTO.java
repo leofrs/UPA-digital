@@ -43,7 +43,7 @@ import lombok.Setter;
 @Setter
 public class LoginRequestDTO {
 
-    private String identifier;
+    private String email;
     private String password;
 
 }

@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Doctor extends User {
+public class Doctor extends SuperUser {
 
     @Column(unique = true, nullable = false)
     private String crm;
@@ -25,8 +25,6 @@ public class Doctor extends User {
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Medical_Record> medicalRecordList;
 
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Calendar> calendar;
 
     @ManyToMany
     @JoinTable(name = "doctor-healthPost",

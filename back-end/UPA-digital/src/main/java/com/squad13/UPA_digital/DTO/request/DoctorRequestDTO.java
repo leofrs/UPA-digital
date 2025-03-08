@@ -1,7 +1,6 @@
 package com.squad13.UPA_digital.DTO.request;
 
 import com.squad13.UPA_digital.model.Appointment;
-import com.squad13.UPA_digital.model.Calendar;
 import com.squad13.UPA_digital.model.Health_Post;
 import com.squad13.UPA_digital.model.Medical_Record;
 
@@ -29,13 +28,6 @@ public class DoctorRequestDTO {
 
     private String specialty;
 
-    private List<Medical_Record> medicalRecordList;
-
-    private List<Calendar> calendar;
-
-    private List<Health_Post> health_postList;
-
-    private List<Appointment> appointmentList;
 
     public String getName() {
         return name;
@@ -73,19 +65,4 @@ public class DoctorRequestDTO {
         return specialty;
     }
 
-    public List<Medical_Record> getMedicalRecordList() {
-        return medicalRecordList;
-    }
-
-    public List<Calendar> getCalendar() {
-        return calendar;
-    }
-
-    public List<Health_Post> getHealth_postList() {
-        return health_postList;
-    }
-
-    public List<Appointment> getAppointmentList() {
-        return appointmentList;
-    }
 }

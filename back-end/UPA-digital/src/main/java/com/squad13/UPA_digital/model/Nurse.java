@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Nurse extends User {
+public class Nurse extends SuperUser {
     
     @Column(unique = true)
     private String corem;

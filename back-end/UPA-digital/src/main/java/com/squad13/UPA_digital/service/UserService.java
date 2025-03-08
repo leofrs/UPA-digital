@@ -56,55 +56,27 @@
  */
 package com.squad13.UPA_digital.service;
 
-import com.squad13.UPA_digital.model.Doctor;
-import com.squad13.UPA_digital.model.Nurse;
-import com.squad13.UPA_digital.model.Patient;
-import com.squad13.UPA_digital.model.User;
-import com.squad13.UPA_digital.repository.DoctorRepository;
-import com.squad13.UPA_digital.repository.NurseRepository;
-import com.squad13.UPA_digital.repository.PatientRepository;
+import com.squad13.UPA_digital.model.*;
+import com.squad13.UPA_digital.repository.UserRepository;
+import com.squad13.UPA_digital.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
-    private NurseRepository nurseRepository;
+    private UserRepository userRepository;
     @Autowired
-    private DoctorRepository doctorRepository;
+    private TokenService tokenService;
 
-    @Autowired
-    private PatientRepository pacientRepository;
-
-
-    public Optional<User> login(String identifier, String password) throws Exception{
-
-        Optional<Patient> patient = pacientRepository.findByCartSusNum(identifier);
-        if (patient.isPresent()) {
-            if (passwordEncoder.matches(password, patient.get().getPassword())) {
-                return Optional.of(patient.get());
-            }
+    public String login(String identifier, String password) throws Exception {
+        User user = (User) this.userRepository.findByEmail(identifier);
+        if (passwordEncoder.matches(password, user.getPassword())) {
+            return this.tokenService.generateToken(user);
         }
-
-        // Verificando se a senha fornecida é válida para o médico
-        Optional<Doctor> doctor = doctorRepository.findByCrm(identifier);
-        if (doctor.isPresent() && passwordEncoder.matches(password, doctor.get().getPassword())) {
-            return Optional.of(doctor.get());
-        }
-
-        // Verificando se a senha fornecida é válida para o enfermeiro
-        Optional<Nurse> nurse = nurseRepository.findByCoremAndPassword(identifier, password);
-        if (nurse.isPresent() && passwordEncoder.matches(password, nurse.get().getPassword())) {
-            return Optional.of(nurse.get());
-        }
-        
-        throw new Exception("login inválido");
+        return identifier;
     }
-
-
 }

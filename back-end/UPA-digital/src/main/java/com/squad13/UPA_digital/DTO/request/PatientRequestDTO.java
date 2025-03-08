@@ -1,10 +1,6 @@
 package com.squad13.UPA_digital.DTO.request;
 
-import com.squad13.UPA_digital.model.Calendar;
-import com.squad13.UPA_digital.model.Medical_Record;
-
 import java.time.LocalDate;
-import java.util.List;
 
 public class PatientRequestDTO {
 
@@ -20,15 +16,10 @@ public class PatientRequestDTO {
 
     private byte[] photo;
 
-    private Integer version;
-
     private String cartSusNum;
 
     private String address;
 
-    private List<Medical_Record> medical_recordList;
-
-    private List<Calendar> calendar;
 
     public String getName() {
         return name;
@@ -54,10 +45,6 @@ public class PatientRequestDTO {
         return photo;
     }
 
-    public Integer getVersion() {
-        return version;
-    }
-
     public String getCartSusNum() {
         return cartSusNum;
     }
@@ -66,11 +53,5 @@ public class PatientRequestDTO {
         return address;
     }
 
-    public List<Medical_Record> getMedical_recordList() {
-        return medical_recordList;
-    }
 
-    public List<Calendar> getCalendar() {
-        return calendar;
-    }
 }

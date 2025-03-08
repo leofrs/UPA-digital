@@ -3,6 +3,7 @@ package com.squad13.UPA_digital.DTO;
 import com.squad13.UPA_digital.DTO.request.DoctorRequestDTO;
 import com.squad13.UPA_digital.DTO.request.PatientRequestDTO;
 import com.squad13.UPA_digital.DTO.response.DoctorResponseDTO;
+import com.squad13.UPA_digital.DTO.response.PatientResponseDTO;
 import com.squad13.UPA_digital.model.Doctor;
 import com.squad13.UPA_digital.model.Patient;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,6 @@ public class AdminConverter {
         doctor.setCrm(doctorRequestDTO.getCrm());
         doctor.setIsActive(doctorRequestDTO.getIsActive() != null ? doctorRequestDTO.getIsActive() : true);
         doctor.setSpecialty(doctorRequestDTO.getSpecialty());
-        doctor.setMedicalRecordList(doctorRequestDTO.getMedicalRecordList());
         return doctor;
     }
 
@@ -46,5 +46,14 @@ public class AdminConverter {
         return patient;
     }
 
-    //TODO: FAZER FUNÇÃO toPatientDTO()
+    public PatientResponseDTO toPatientDTO(Patient patient) {
+        PatientResponseDTO patientResponseDTO = new PatientResponseDTO();
+        patientResponseDTO.setName(patient.getName());
+        patientResponseDTO.setBirthDate(patient.getBirthDate());
+        patient.setContact(patient.getContact());
+        patientResponseDTO.setEmail(patient.getEmail());
+        patientResponseDTO.setCartSusNum(patient.getCartSusNum());
+        patientResponseDTO.setAddress(patient.getAddress());
+        return patientResponseDTO;
+    }
 }

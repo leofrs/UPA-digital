@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Patient extends User{
+public class Patient extends SuperUser{
 
     @Column(unique = true, nullable = false)
     private String cartSusNum;
@@ -20,8 +20,6 @@ public class Patient extends User{
     @OneToMany(mappedBy = "paciente")
     private List<Medical_Record> medical_recordList;
 
-    @OneToMany(mappedBy = "paciente")  // mappedBy points to the "paciente" property in Calendar
-    private List<Calendar> calendar;
 
 }
 
