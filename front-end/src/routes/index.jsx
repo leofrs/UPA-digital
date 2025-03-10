@@ -1,6 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import AuthRoute from "./authRouter"; // Wrapper de autenticação
-import { AuthProvider } from "@/context/authProvider"; // Contexto de autenticação
 import LoginPage from "@/pages/LoginPage"; // Página de login
 import DashboardPage from "@/app/dashboard/page"; // Página de dashboard
 import HomePageDoctor from "@/pages/doctor"; // Página para médicos
@@ -16,100 +14,97 @@ import AllPatient from "@/pages/doctor/AllPatient";
 import HistoryPatient from "@/pages/doctor/HistoryDoctor";
 import History from "@/pages/patient/History";
 
+import { AuthProvider } from "@/context/authProvider";
+import ProtectedRoute from "./protectedRoute";
+
 export const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <LoginPage />,
-    },
-    {
+  {
+    path: "/",
+    element: (
+      <AuthProvider>
+        <LoginPage />
+      </AuthProvider>
+    ),
+  },
+  {
+    element: (
+      <AuthProvider>
+        <DashboardPage />
+      </AuthProvider>
+    ),
+    children: [
+      {
+        path: "patient/home",
         element: (
-            <AuthProvider>
-                <DashboardPage />
-            </AuthProvider>
+          <ProtectedRoute allowedRoles={["ADMIN"]}>
+            <HomePagePatient />
+          </ProtectedRoute>
         ),
         children: [
-            {
-                path: "patient/home",
-                element: (
-                    <AuthRoute requiredRole="patient">
-                        <HomePagePatient />
-                    </AuthRoute>
-                ),
-                children: [
-                    {
-                        path: "all-doctors",
-                        element: <AllDoctors />,
-                    },
-                    {
-                        path: "health-posts",
-                        element: <HealthPosts />,
-                    },
-                    {
-                        path: "make-appointment",
-                        element: <MakeAnAppointment />,
-                    },
-                    {
-                        path: "calendar-patient",
-                        element: <CalendarPatient />,
-                    },
-                    {
-                        path: "perfil",
-                        element: <Perfil />,
-                    },
-                    {
-                        path: "history",
-                        element: <History />,
-                    },
-                ],
-            },
-            {
-                path: "doctor/home",
-                element: (
-                    <AuthRoute requiredRole="doctor">
-                        <HomePageDoctor />
-                    </AuthRoute>
-                ),
-                 children: [
-                    {
-                        path: "all-patient",
-                        element: <AllPatient />,
-                    },
-                    {
-                        path: "history-patient",
-                        element: <HistoryPatient />,
-                    },
-                    
-                   
-                    {
-                        path: "calendar-doctor",
-                        element: <CalendarDoctor />,
-                    },
-                    {
-                        path: "perfil",
-                        element: <Perfil />,
-                    },
-                ],
-               
-            },
-            {
-                path: "recepptionist/home",
-                element: (
-                    <AuthRoute requiredRole="recepptionist">
-                        <HomePaceRecepptionist />
-                    </AuthRoute>
-                ),
-                children: [
-                    {
-                        path: "make-appointment",
-                        element: <MakeAnAppointment />,
-                    },
-                   
-                    {
-                        path: "perfil",
-                        element: <Perfil />,
-                    },
-                ],
-            },
+          {
+            path: "all-doctors",
+            element: <AllDoctors />,
+          },
+          {
+            path: "health-posts",
+            element: <HealthPosts />,
+          },
+          {
+            path: "make-appointment",
+            element: <MakeAnAppointment />,
+          },
+          {
+            path: "calendar-patient",
+            element: <CalendarPatient />,
+          },
+          {
+            path: "perfil",
+            element: <Perfil />,
+          },
+          {
+            path: "history",
+            element: <History />,
+          },
         ],
-    },
+      },
+      {
+        path: "doctor/home",
+        element: <HomePageDoctor />,
+        children: [
+          {
+            path: "all-patient",
+            element: <AllPatient />,
+          },
+          {
+            path: "history-patient",
+            element: <HistoryPatient />,
+          },
+
+          {
+            path: "calendar-doctor",
+            element: <CalendarDoctor />,
+          },
+          {
+            path: "perfil",
+            element: <Perfil />,
+          },
+        ],
+      },
+      {
+        path: "recepptionist/home",
+        element: <HomePaceRecepptionist />,
+        children: [
+          {
+            path: "make-appointment",
+            element: <MakeAnAppointment />,
+          },
+
+          {
+            path: "perfil",
+            element: <Perfil />,
+          },
+        ],
+      },
+    ],
+  },
 ]);

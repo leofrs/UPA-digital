@@ -1,140 +1,140 @@
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Navigate, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useAuth } from "../context/authContext";
-import { jwtDecode } from "jwt-decode";
+import { useAuth } from "@/context/authContext";
 
-const token = "eyJ0eXAiO.../// jwt token";
+const URL_API = "http://localhost:8080/api/v1/login";
 
+const loginSchema = z.object({
+  email: z
+    .string()
+    .regex(
+      /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      "O email precisa ser válido"
+    ),
+  password: z.string().min(6, "A senha deve conter pelo menos 6 caracteres"),
+});
 
 function LoginPage() {
-    const URL_API = 'http://localhost:8080/api/v1/login';
-    const navigate = useNavigate()
-    const loginSchema = z.object({
-        email: z
-            .string()
-            .regex(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "O email precisa ser válido"),
-        password: z.string().min(6, "A senha deve conter pelo menos 6 caracteres"),
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
-    });
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm({
-        resolver: zodResolver(loginSchema),
-        defaultValues: {
-            email: "",
-            password: "",
-            
-        }
-    });
-    const onSubmit = async (data) => {
-        try {
-            // Fazer a requisição POST para o back-end
-            const response = await axios.post(`${URL_API}`, {
-                email: data.email,
-                password: data.password
-            });
-            const decoded = jwtDecode(response.data.token);
-            // Armazenar o token no localStorage
-            // localStorage.setItem('token', decoded);
-            console.log(decoded.role); 
-            // Definir o cabeçalho Authorization para as próximas requisições
-            // axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-            
-            // Redirecionar para a página do doutor
-            // navigate("/doctor/home");
+  const { login } = useAuth();
 
-        } catch (err) {
-            // Exibir mensagem de erro caso o login falhe
-            console.error(err);
-        }
+  const onSubmit = async (data, e) => {
+    e.preventDefault();
+    const { email, password } = data;
 
+    try {
+      const response = await fetch(`${URL_API}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log(data.token);
+        login(data.token);
+      } else {
+        console.log("Erro ao fazer o login: ", data.message);
+      }
+    } catch (error) {
+      console.log("Erro na requisição: ", error);
     }
+  };
 
-    
+  return (
+    <div className="flex justify-center items-center  bg-gray-100 pt-20">
+      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+        <h1 className="text-2xl font-bold text-center text-blue-700 mb-6">
+          Login SUS
+        </h1>
 
-
-    
-    return(
-        <div className="flex justify-center items-center  bg-gray-100 pt-20">
-        <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
-            <h1 className="text-2xl font-bold text-center text-blue-700 mb-6">Login SUS</h1>
-
-          
-
-            <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl border border-gray-100"
-            >
-                <div className="space-y-6">
-                    <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-600 mb-2">
-                            Email
-                        </label>
-                        <input
-                            id="email"
-                            type="text"
-                            {...register("email")}
-                            className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-xl 
-                            ${errors.email
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl border border-gray-100"
+        >
+          <div className="space-y-6">
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-600 mb-2"
+              >
+                Email
+              </label>
+              <input
+                id="email"
+                type="text"
+                {...register("email")}
+                className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-xl 
+                            ${
+                              errors.email
                                 ? "border-red-400"
                                 : "border-gray-200"
                             }`}
-                            placeholder="Digite seu número do cartão"
-                        />
-                        {errors.cpf && (
-                            <div className="text-red-500 text-sm mt-2">
-                                {errors.email.message}
-                            </div>
-                        )}
-                    </div>
-
-                    <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-600 mb-2">
-                            Senha
-                        </label>
-                        <input
-                            id="password"
-                            type="password"
-                            {...register("password")}
-                            className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-xl 
-                            ${errors.password
-                                ? "border-red-400"
-                                : "border-gray-200"
-                            }`}
-                            placeholder="Digite sua senha"
-                        />
-                        {errors.password && (
-                            <div className="text-red-500 text-sm mt-2">
-                                {errors.password.message}
-                            </div>
-                        )}
-                    </div>
-
-                     
-                    
-
-                    
-                        
-                    
-
-                    <button
-                        type="submit"
-                        className="w-full py-3 px-4 bg-blue-600 text-white font-bold rounded-xl 
-                        hover:bg-green-700 transition-all duration-300"
-                    >
-                        Entrar
-                    </button>
+                placeholder="Digite seu número do cartão"
+              />
+              {errors.cpf && (
+                <div className="text-red-500 text-sm mt-2">
+                  {errors.email.message}
                 </div>
-            </form>
-        </div>
+              )}
+            </div>
+
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-600 mb-2"
+              >
+                Senha
+              </label>
+              <input
+                id="password"
+                type="password"
+                {...register("password")}
+                className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-xl 
+                            ${
+                              errors.password
+                                ? "border-red-400"
+                                : "border-gray-200"
+                            }`}
+                placeholder="Digite sua senha"
+              />
+              {errors.password && (
+                <div className="text-red-500 text-sm mt-2">
+                  {errors.password.message}
+                </div>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-3 px-4 bg-blue-600 text-white font-bold rounded-xl 
+                        hover:bg-green-700 transition-all duration-300"
+            >
+              Entrar
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-    )
+  );
 }
 
-export default LoginPage
+export default LoginPage;

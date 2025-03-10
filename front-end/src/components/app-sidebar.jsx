@@ -19,8 +19,8 @@ import { recepptionistNavBar } from "@/data/recepptionistNavBar";
 import { useAuth } from "../context/authContext";
 
 export function AppSidebar({ ...props }) {
-  const { user } = useAuth();
-  console.log(user.role);
+  const { user, logout } = useAuth();
+
   return (
     <Sidebar variant="floating" {...props}>
       <SidebarHeader>
@@ -124,6 +124,14 @@ export function AppSidebar({ ...props }) {
               ))}
             </SidebarMenu>
           ) : null}
+
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <button onClick={logout} className="font-medium">
+                Sair
+              </button>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>

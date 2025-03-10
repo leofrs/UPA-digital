@@ -23,11 +23,17 @@ public class UserController {
     @Autowired
     private TokenService tokenService;
 
-//    @PostMapping("/login")
-//    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO requestDTO){
-//        User user = userService.login(requestDTO.getEmail(), requestDTO.getEmail());
-//
-//
-//    }
+    @Autowired
+    private UserRepository userRepository;
+
+@PostMapping("/login")
+public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO requestDTO){
+    User user = (User) this.userRepository.findByEmail(requestDTO.getEmail());
+    if(passwordEncoder.matches(requestDTO.getPassword(), user.getPassword())) {
+        String token = this.tokenService.generateToken(user);
+        return ResponseEntity.ok(new LoginResponseDTO(token));
+    }
+    return ResponseEntity.badRequest().build();
+ }
 
 }
