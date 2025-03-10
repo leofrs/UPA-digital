@@ -11,30 +11,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-public class UsuarioController {
+public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
     private TokenService tokenService;
 
-    @PostMapping("/login")
-    @CrossOrigin(origins = "http://localhost:5173/")
-    public ResponseEntity login(@RequestBody LoginRequestDTO body){
-        //TODO: ARRUMAR ISSO E MANDAR PARA A SERVICE!!!
-        User user = (User) this.userRepository.findByEmail(body.getEmail());
-        if(passwordEncoder.matches(body.getPassword(), user.getPassword())) {
-            String token = this.tokenService.generateToken(user);
-            return ResponseEntity.ok(new LoginResponseDTO(token));
-        }
-        return ResponseEntity.badRequest().build();
-    }
+//    @PostMapping("/login")
+//    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO requestDTO){
+//        User user = userService.login(requestDTO.getEmail(), requestDTO.getEmail());
+//
+//
+//    }
 
 }

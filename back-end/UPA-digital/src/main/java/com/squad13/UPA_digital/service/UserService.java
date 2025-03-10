@@ -72,11 +72,15 @@ public class UserService {
     @Autowired
     private TokenService tokenService;
 
-    public String login(String identifier, String password) throws Exception {
+    public User login(String identifier, String password){
+        //TODO: MUDAR DE USER PARA AS CLASSES ADMIN, DOCTOR, PATIENT, RECEPTIONIST
         User user = (User) this.userRepository.findByEmail(identifier);
-        if (passwordEncoder.matches(password, user.getPassword())) {
-            return this.tokenService.generateToken(user);
+
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new RuntimeException("Senha inválida.");
         }
-        return identifier;
+        String token = tokenService.generateToken(user);
+        user.setPassword(token);
+        return user;
     }
 }

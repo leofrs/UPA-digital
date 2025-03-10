@@ -2,7 +2,10 @@ package com.squad13.UPA_digital.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -17,9 +20,10 @@ public class Patient extends SuperUser{
     @Column(nullable = false)
     private String address;
 
-    @OneToMany(mappedBy = "paciente")
-    private List<Medical_Record> medical_recordList;
-
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_PATIENT"));
+    }
 
 }
 

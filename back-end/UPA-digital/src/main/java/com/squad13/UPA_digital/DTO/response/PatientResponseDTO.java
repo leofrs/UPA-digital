@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 public class PatientResponseDTO {
 
+    private Long id;
+
     private String name;
 
     private LocalDate birthDate;
@@ -15,6 +17,14 @@ public class PatientResponseDTO {
     private String cartSusNum;
 
     private String address;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

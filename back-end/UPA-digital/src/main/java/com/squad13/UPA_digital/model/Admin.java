@@ -1,9 +1,15 @@
 package com.squad13.UPA_digital.model;
 
+import com.squad13.UPA_digital.utils.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Getter
@@ -11,45 +17,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Admin extends SuperUser {
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+    }
 
-    //#TODO: Add the following attributes to the User class
-     /** 
-    @OneToMany(mappedBy = "admin")
-    private List<Medicine> medicineList;
-
-    @OneToMany(mappedBy = "admin")
-    private List<Exam> examList;
-
-    @OneToMany(mappedBy = "admin")
-    private List<Prescription> prescriptionList;
-
-    @OneToMany(mappedBy = "admin")
-    private List<Consultation> consultationList;
-
-    @OneToMany(mappedBy = "admin")
-    private List<Report> reportList;
-
-    @OneToMany(mappedBy = "admin")
-    private List<Notification> notificationList;
-
-    @OneToMany(mappedBy = "admin")
-    private List<Chat> chatList;
-
-    @OneToMany(mappedBy = "admin")
-    private List<Chat_Message> chat_messageList;
-
-    @OneToMany(mappedBy = "admin")
-    private List<Chat_User> chat_userList;
-
-    @OneToMany(mappedBy = "admin")
-    private List<Chat_User> chat_userList1;
-
-    @OneToMany(mappedBy = "admin")
-    private List<Chat_User> chat_userList2;
-
-    @OneToMany(mappedBy = "admin")
-    private List<Chat_User> chat_userList3;
-
-    **/
-    
 }

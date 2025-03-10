@@ -22,10 +22,6 @@ public class Doctor extends SuperUser {
     @Column(nullable = false)
     private String specialty;
 
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Medical_Record> medicalRecordList;
-
-
     @ManyToMany
     @JoinTable(name = "doctor-healthPost",
             joinColumns = @JoinColumn(name = "doctor_id"),
@@ -36,9 +32,5 @@ public class Doctor extends SuperUser {
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     private List<Appointment> appointmentList;
 
-//    @ManyToOne
-//    @JoinColumn(name = "id_prescription") // Foreign key to Prescription
-//    private Prescription prescription;
-//
 
 }

@@ -2,10 +2,13 @@ package com.squad13.UPA_digital.DTO;
 
 import com.squad13.UPA_digital.DTO.request.DoctorRequestDTO;
 import com.squad13.UPA_digital.DTO.request.PatientRequestDTO;
+import com.squad13.UPA_digital.DTO.request.RegisterRequestDTO;
 import com.squad13.UPA_digital.DTO.response.DoctorResponseDTO;
 import com.squad13.UPA_digital.DTO.response.PatientResponseDTO;
+import com.squad13.UPA_digital.DTO.response.RegisterResponseDTO;
 import com.squad13.UPA_digital.model.Doctor;
 import com.squad13.UPA_digital.model.Patient;
+import com.squad13.UPA_digital.model.User;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -48,6 +51,7 @@ public class AdminConverter {
 
     public PatientResponseDTO toPatientDTO(Patient patient) {
         PatientResponseDTO patientResponseDTO = new PatientResponseDTO();
+        patientResponseDTO.setId(patient.getId());
         patientResponseDTO.setName(patient.getName());
         patientResponseDTO.setBirthDate(patient.getBirthDate());
         patient.setContact(patient.getContact());
@@ -56,4 +60,22 @@ public class AdminConverter {
         patientResponseDTO.setAddress(patient.getAddress());
         return patientResponseDTO;
     }
+
+    public User toRegisterEntity (RegisterRequestDTO requestDTO) {
+        User user = new User();
+        user.setName(requestDTO.getName());
+        user.setEmail(requestDTO.getEmail());
+        user.setPassword(requestDTO.getPassword());
+        user.setRole(requestDTO.getRole());
+        return user;
+    }
+
+    public RegisterResponseDTO toRegisterDto(User user) {
+        RegisterResponseDTO responseDTO = new RegisterResponseDTO();
+        responseDTO.setId(user.getId());
+        responseDTO.setEmail(user.getEmail());
+        responseDTO.setRole(user.getRole());
+        return responseDTO;
+    }
+
 }

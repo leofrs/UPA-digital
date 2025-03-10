@@ -35,6 +35,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/api/v1/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/admins/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/doctors/**").hasAnyRole("ADMIN", "DOCTOR")
+                        .requestMatchers(HttpMethod.POST, "/api/patients/**").hasAnyRole("ADMIN", "PATIENT")
                         .anyRequest().authenticated()
                 )
                 .cors(Customizer.withDefaults())

@@ -1,13 +1,7 @@
 package com.squad13.UPA_digital.DTO.request;
 
-import com.squad13.UPA_digital.model.Appointment;
-import com.squad13.UPA_digital.model.Health_Post;
-import com.squad13.UPA_digital.model.Medical_Record;
-
-
 
 import java.time.LocalDate;
-import java.util.List;
 public class DoctorRequestDTO {
 
     private String name;
