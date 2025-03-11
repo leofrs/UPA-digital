@@ -1,6 +1,6 @@
 class DoctorApi {
   static async getDoctors() {
-    await fetch("http://localhost:8080//api/v1/doctor/all-doctor")
+    await fetch("http://localhost:8080/api/v1/doctor/all-doctor")
       .then((response) => {
         return response.json();
       })

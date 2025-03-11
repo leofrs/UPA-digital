@@ -59,7 +59,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="flex justify-center items-center  bg-gray-100 pt-20">
+    <div className="flex justify-center items-center pt-52 h-full">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
         <h1 className="text-2xl font-bold text-center text-blue-700 mb-6">
           Login SUS

@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-import { allDoctors } from "@/data/tableAllDoctors";
-import { get, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import DoctorApi from "@/api/doctor";
 
 const validationSchema = z.object({
   medico: z.string().nonempty("É obrigatório selecionar um médico"),
@@ -26,7 +23,7 @@ const MakeAnAppointment = () => {
   useEffect(() => {
     try {
       const doctor = async () => {
-        await fetch("http://localhost:8080/api/v1/appointments")
+        await fetch("http://localhost:8080/api/v1/doctor/all-doctor")
           .then((response) => {
             return response.json();
           })
@@ -66,42 +63,40 @@ const MakeAnAppointment = () => {
 
   const onSubmit = async (data) => {
     try {
-      // Validar se todos os campos estão preenchidos
-      if (!data.medico || !data.data || !data.descricao) {
-        setFormStatus({
-          show: true,
-          success: false,
-          message: "Por favor, preencha todos os campos obrigatórios.",
-        });
-        return;
-      }
-
-      // Criar objeto com todos os dados, incluindo especialidade e posto do médico selecionado
       const appointmentData = {
-        ...data,
+        medico: selectedDoctor.name,
+        data: data.data,
+        descricao: data.descricao,
         id: selectedDoctor.id,
-        especialidade: selectedDoctor.especialidade,
+        especialidade: selectedDoctor.specialty,
         posto: selectedDoctor.posto,
         contato: selectedDoctor.contato,
       };
+
       console.log("Dados antes de enviar:", appointmentData);
 
-      /*const response = await axios.post(`${URL_API}/`,  (appointmentData) , {
-    id: appointmentData.id,
-    medico:appointmentData.medico,
-    data: appointmentData.data,
-    especialidade: appointmentData.especialidade,
-    contato:appointmentData.contato,
-    posto:appointmentData.posto,
-    descricao: appointmentData.descricao
- });*/
-
-      setFormStatus({
-        show: true,
-        success: true,
-        message:
-          "Consulta marcada com sucesso! Em breve você receberá um email de confirmação.",
+      /* const response = await fetch("http://localhost:8080/api/v1/consultation", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(appointmentData),
       });
+  
+      if (response.ok) {
+        setFormStatus({
+          show: true,
+          success: true,
+          message:
+            "Consulta marcada com sucesso! Em breve você receberá um e-mail de confirmação.",
+        });
+      } else {
+        setFormStatus({
+          show: true,
+          success: false,
+          message: "Erro ao marcar consulta. Por favor, tente novamente.",
+        });
+      } */
     } catch (error) {
       setFormStatus({
         show: true,
@@ -162,7 +157,7 @@ const MakeAnAppointment = () => {
                 <option value="">Selecione um médico</option>
                 {data.map((doctor) => (
                   <option key={doctor.id} value={doctor.name}>
-                    {doctor.name} - {doctor.speciality}
+                    {doctor.name} - {doctor.specialty}
                   </option>
                 ))}
               </select>

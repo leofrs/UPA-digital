@@ -36,5 +36,15 @@ public class AdminService {
     }
 
 
+    public User registerUser(User user) {
+        return userRepository.save(user);
+    }
 
+    public List<Patient> listAllPatients() {
+        return patientRepository.findAll();
+    }
+
+    public List<Doctor> listAllDoctors() {
+        return doctorRepository.findAll();
+    }
 }
