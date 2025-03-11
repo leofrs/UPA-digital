@@ -35,6 +35,8 @@ export const AuthProvider = ({ children }) => {
       navigate("/admin/home", { replace: true });
     } else if (decoded.role === "PATIENT") {
       navigate("/patient/home", { replace: true });
+    } else if (decoded.role === "DOCTOR") {
+      navigate("/doctor/home", { replace: true });
     } else {
       navigate("/");
     }

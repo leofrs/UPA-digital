@@ -1,75 +1,75 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { cardPatient } from "@/data/cardPatient";
-import { Button } from "@/components/ui/button";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import PaginationComponent from "@/components/pagination";
 import { useState } from "react";
-import { consultasMarcadas } from "@/data/tableConsultasMarcadas";
+import { allPatient } from "@/data/tableAllPatient";
+
 import { Outlet, useLocation } from "react-router-dom";
 
 const validRoutes = [
-    "/doctor/home/all-patient",
-    "/doctor/home/calendar-doctor",
-    "/doctor/home/perfil",
-    "/doctor/home/history-patient",
+  "/doctor/home/all-patient",
+  "/doctor/home/calendar-doctor",
+  "/doctor/home/perfil",
+  "/doctor/home/history-patient",
 ];
 
 const HomePageDoctor = () => {
-    const ITEMS_PER_PAGE = 10;
-    const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 10;
+  const [currentPage, setCurrentPage] = useState(1);
 
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const visibleItems = consultasMarcadas.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const visibleItems = allPatient.slice(
+    startIndex,
+    startIndex + ITEMS_PER_PAGE
+  );
+  const totalPages = Math.ceil(allPatient.length / ITEMS_PER_PAGE);
 
-    const totalPages = Math.ceil(consultasMarcadas.length / ITEMS_PER_PAGE);
+  const location = useLocation();
+  const urlPath = location.pathname;
 
-    const location = useLocation();
-    const urlPath = location.pathname;
+  return (
+    <div>
+      <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
+        {validRoutes.includes(urlPath) ? (
+          <Outlet />
+        ) : (
+          <>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Nome</TableHead>
+                  <TableHead>Cartão SUS</TableHead>
+                  <TableHead>Endereço</TableHead>
+                </TableRow>
+              </TableHeader>
 
-    return (
-        <div>
-            
+              <TableBody>
+                {visibleItems.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell className="font-medium">{item.nome}</TableCell>
+                    <TableCell>{item.cartao_sus}</TableCell>
+                    <TableCell>{item.address}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
 
-            <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
-                {validRoutes.includes(urlPath) ? (
-                    <Outlet />
-                ) : (
-                    <>
-                        <Table>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead>Especialidade</TableHead>
-                                    <TableHead>Status</TableHead>
-                                    <TableHead>Unidade</TableHead>
-                                    <TableHead>Data</TableHead>
-                                    <TableHead>Horário</TableHead>
-                                    <TableHead>Infos</TableHead>
-                                </TableRow>
-                            </TableHeader>
-
-                            <TableBody>
-                                {visibleItems.map((item, index) => (
-                                    <TableRow key={index}>
-                                        <TableCell className="font-medium">{item.especialidade}</TableCell>
-                                        <TableCell>{item.status}</TableCell>
-                                        <TableCell>{item.posto}</TableCell>
-                                        <TableCell>{item.data}</TableCell>
-                                        <TableCell>{item.horario}</TableCell>
-                                        <TableCell className="cursor-pointer">Saiba mais</TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                        <PaginationComponent
-                            currentPage={currentPage}
-                            totalPages={totalPages}
-                            onPageChange={setCurrentPage}
-                        />
-                    </>
-                )}
-            </div>
-        </div>
-    );
+            <PaginationComponent
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
+          </>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default HomePageDoctor;
