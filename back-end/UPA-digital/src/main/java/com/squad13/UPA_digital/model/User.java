@@ -47,6 +47,7 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
         else if (this.role == UserRole.PATIENT) return List.of(new SimpleGrantedAuthority("ROLE_PATIENT"));
+        else if (this.role == UserRole.DOCTOR) return List.of(new SimpleGrantedAuthority("ROLE_DOCTOR"));
         else return List.of(new SimpleGrantedAuthority("ROLE_RECEPTIONIST"));
     }
 

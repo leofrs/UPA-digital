@@ -29,4 +29,5 @@ public class AppointmentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 
+
 }

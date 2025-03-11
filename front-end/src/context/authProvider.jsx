@@ -32,6 +32,8 @@ export const AuthProvider = ({ children }) => {
     const decoded = jwtDecode(token);
     setUser({ token, role: decoded.role });
     if (decoded.role === "ADMIN") {
+      navigate("/admin/home", { replace: true });
+    } else if (decoded.role === "PATIENT") {
       navigate("/patient/home", { replace: true });
     } else {
       navigate("/");

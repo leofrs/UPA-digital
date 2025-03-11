@@ -20,6 +20,7 @@ import { useAuth } from "../context/authContext";
 
 export function AppSidebar({ ...props }) {
   const { user, logout } = useAuth();
+  console.log(user);
 
   return (
     <Sidebar variant="floating" {...props}>
@@ -42,7 +43,7 @@ export function AppSidebar({ ...props }) {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          {user.role === "patient" ? (
+          {user.role === "PATIENT" ? (
             <SidebarMenu className="gap-2">
               {/* Paciente */}
               {patientNavBar.navMain.map((item) => (
@@ -69,7 +70,7 @@ export function AppSidebar({ ...props }) {
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
-          ) : user.role === "receptionist" ? (
+          ) : user.role === "RECEPTIONIST" ? (
             <SidebarMenu className="gap-2">
               {/* Recepcionista */}
               {recepptionistNavBar.navMain.map((item) => (
@@ -96,7 +97,7 @@ export function AppSidebar({ ...props }) {
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
-          ) : user.role === "doctor" ? (
+          ) : user.role === "DOCTOR" ? (
             <SidebarMenu className="gap-2">
               {/* Doctor */}
               {doctorNavBar.navMain.map((item) => (

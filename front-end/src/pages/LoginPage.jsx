@@ -49,7 +49,6 @@ function LoginPage() {
       const data = await response.json();
 
       if (response.ok) {
-        console.log(data.token);
         login(data.token);
       } else {
         console.log("Erro ao fazer o login: ", data.message);

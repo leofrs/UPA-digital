@@ -24,6 +24,7 @@ public class AdminService {
     @Autowired
     private UserRepository userRepository;
 
+
     public Doctor addDoctor(Doctor doctor) {
         return doctorRepository.save(doctor);
     }
@@ -34,19 +35,6 @@ public class AdminService {
         return patientRepository.save(patient);
     }
 
-    public User registerUser(User user) {
-        if (this.userRepository.findByEmail(user.getEmail()) != null)
-            throw new RuntimeException("Email já cadastrado.");
-        String encryptedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
-        user.setPassword(encryptedPassword);
-        return userRepository.save(user);
-    }
 
-    public List<Patient> listAllPatients() {
-        return patientRepository.findAll();
-    }
 
-    public List<Doctor> listAllDoctors() {
-        return doctorRepository.findAll();
-    }
 }

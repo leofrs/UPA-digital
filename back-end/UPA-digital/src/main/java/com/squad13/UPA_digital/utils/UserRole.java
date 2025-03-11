@@ -3,7 +3,8 @@ package com.squad13.UPA_digital.utils;
 public enum UserRole {
     ADMIN("admin"),
     PATIENT("patient"),
-    RECEPTIONIST("Receptionist");
+    DOCTOR("doctor");
+
 
     private String role;
 
