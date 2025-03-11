@@ -10,7 +10,7 @@ const loginSchema = z.object({
     .string()
     .regex(
       /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-      "O email precisa ser válido"
+      "Insira um e-mail válido"
     ),
   password: z.string().min(6, "A senha deve conter pelo menos 6 caracteres"),
 });
@@ -62,7 +62,7 @@ function LoginPage() {
     <div className="flex justify-center items-center pt-52 h-full">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
         <h1 className="text-2xl font-bold text-center text-blue-700 mb-6">
-          Login SUS
+          UPA Digital Login
         </h1>
 
         <form
@@ -87,9 +87,9 @@ function LoginPage() {
                                 ? "border-red-400"
                                 : "border-gray-200"
                             }`}
-                placeholder="Digite seu número do cartão"
+                placeholder="Insira seu e-mail"
               />
-              {errors.cpf && (
+              {errors.email && (
                 <div className="text-red-500 text-sm mt-2">
                   {errors.email.message}
                 </div>
@@ -113,7 +113,7 @@ function LoginPage() {
                                 ? "border-red-400"
                                 : "border-gray-200"
                             }`}
-                placeholder="Digite sua senha"
+                placeholder="Insira sua senha"
               />
               {errors.password && (
                 <div className="text-red-500 text-sm mt-2">
